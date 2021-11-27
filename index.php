@@ -189,6 +189,8 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
+    <button onclick="window.open('logout.php')">Logout</button>
+
   </div>
   <!-- /.content-wrapper -->
   <footer class="main-footer">
