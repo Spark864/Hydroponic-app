@@ -16,8 +16,8 @@ if (!$con)
   //die('Could not connect: ' . mysqli_error($con));
   echo 'Failed to connect to MySQL';
   }
-else{
-    echo 'Connection sucessful! ';
-}
+// else{
+//     echo 'Connection sucessful! ';
+// }
 
 ?>
