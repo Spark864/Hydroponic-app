@@ -71,7 +71,7 @@ include('connect.php');
 
     <div class="login-box">
         <div class="login-logo">
-            <b>Hydroponic-App</b>
+            <b>Hydroponic System</b>
         </div>
         <!-- /.login-logo -->
         <div class="card">
