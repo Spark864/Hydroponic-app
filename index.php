@@ -1,6 +1,7 @@
 <?php 
     // Start MySQL Connection
     include('connect.php'); 
+    
 ?>
 
 <!DOCTYPE html>
@@ -129,7 +130,7 @@
 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">Green House: Temperature and Humidity</h3>
+                <h3 class="card-title">Greenhouse: Temperature and Humidity</h3>
               </div>
               <!-- /.card-header -->
               <div class="card-body">
