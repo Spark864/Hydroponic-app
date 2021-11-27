@@ -2,6 +2,7 @@
     // Start MySQL Connection
     include('connect.php'); 
     
+    include('checkLogin.php');
 ?>
 
 <!DOCTYPE html>
