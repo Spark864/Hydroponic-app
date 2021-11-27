@@ -54,6 +54,17 @@
           <i class="fas fa-th-large"></i>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+        
+        <button onclick="window.open('logout.php')">
+          <i class="fas fa-sign-out-alt"></i>
+      </button>
+
+        
+        </a>
+      </li>
+
     </ul>
   </nav>
   <!-- /.navbar -->
@@ -88,7 +99,6 @@
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
                 Index
-                
               </p>
             </a>
           </li>
@@ -191,7 +201,7 @@
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
-    <button onclick="window.open('logout.php')">Logout</button>
+    <!-- <button onclick="window.open('logout.php')">Logout</button> -->
 
   </div>
   <!-- /.content-wrapper -->
