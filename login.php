@@ -57,6 +57,13 @@ include('connect.php');
                     $_SESSION["loggedin"]=true;
                     $_SESSION["id"]=$row["id"];
                     $_SESSION["username"]=$row["username"];
+                    if(isset($_POST["remember"])) {
+                        setcookie ("login_username",$_POST["username"],time()+ (60 * 60));
+                    } else {
+                        if(isset($_COOKIE["login_username"])) {
+                            setcookie ("login_username","");
+                        }
+                    }
                     // Redirect user to index page
                     header("location: index.php");
                 }
@@ -79,31 +86,40 @@ include('connect.php');
                 <p class="login-box-msg">Sign in</p>
                 <?php 
                 if(!empty($login_err)){
-                echo $login_err; 
-                }
+                    echo '<div class="alert alert-danger">' . $login_err . '</div>';
+                }        
                 ?>
 
                 <form role="form" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-                    <div class="input-group mb-3">
-                        <?php 
-                        if (!empty($username_err)){
+                    <span class="text-danger">
+                            <?php 
+                            if (!empty($username_err)){
                             echo $username_err;
-                        }
-                        ?>
-                        <input type="text" name="username" class="form-control" placeholder="Username">
+                            } 
+                            ?>
+                        </span>
+                    <div class="input-group mb-3">
+                        
+                        <input type="text" name="username" <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?> value="<?php if(isset($_COOKIE["login_username"])) { echo $_COOKIE["login_username"]; } ?>" class="form-control" placeholder="Username">
+                        
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 
                             </div>
                         </div>
                     </div>
-                    <div class="input-group mb-3">
-                    <?php 
+                    <span class="text-danger">
+                        <?php 
                         if (!empty($password_err)){
-                            echo $password_err;
+                            echo $password_err.'<br/>';
                         }
                         ?>
-                        <input type="password" name="password" class="form-control" placeholder="Password">
+                    </span>
+                    <div class="input-group mb-3">
+                    
+                         
+                        <input type="password" name="password" <?php echo (!empty($username_err)) ? 'is-invalid' : ''; ?> value="" class="form-control" placeholder="Password">
+                            
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -113,7 +129,7 @@ include('connect.php');
                     <div class="row">
                         <div class="col-8">
                             <div class="icheck-primary">
-                                <input type="checkbox" id="remember">
+                                <input type="checkbox" name="remember" id="remember" <?php if(isset($_COOKIE["login_username"])) { ?> checked <?php } ?> >
                                 <label for="remember">
                 Remember Me
               </label>
