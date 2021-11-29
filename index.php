@@ -103,7 +103,7 @@
           
           <li class="nav-item">
             <a href="calendar.php" class="nav-link">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <i class="nav-icon fa fa-calendar" aria-hidden="true"></i>
               <p>
                 Calendar
               </p>
