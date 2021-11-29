@@ -33,11 +33,9 @@
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
+        <a href="index.html" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
+      
     </ul>
 
     <!-- Right navbar links -->
@@ -98,12 +96,19 @@
             <a href="index.php" class="nav-link">
               <i class="nav-icon far fa-calendar-alt"></i>
               <p>
-                Index
+                Home
               </p>
             </a>
           </li>
           
-          <li class="nav-header">EXAMPLES</li>
+          <li class="nav-item">
+            <a href="calendar.php" class="nav-link">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+              <p>
+                Calendar
+              </p>
+            </a>
+          </li>
          
           
         </ul>
