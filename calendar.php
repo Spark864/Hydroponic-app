@@ -101,7 +101,7 @@
           
           <li class="nav-item">
             <a href="calendar.php" class="nav-link">
-            <i class="fa fa-calendar" aria-hidden="true"></i>
+            <i class="nav-icon fa fa-calendar" aria-hidden="true"></i>
               <p>
                  Calendar
               </p>
@@ -244,8 +244,7 @@
 <script src="dist/js/demo.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+
 <!-- Page specific script -->
 <script>
   $(function () {
