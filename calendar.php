@@ -325,8 +325,7 @@
         {
           title          : 'Harvest day',
           start          : '2021-12-30',
-          end            : new Date(y, m, d, 14, 0),
-          allDay         : false,
+          allDay         : true,
           backgroundColor: '#00c0ef', //Info (aqua)
           borderColor    : '#00c0ef' //Info (aqua)
         }
