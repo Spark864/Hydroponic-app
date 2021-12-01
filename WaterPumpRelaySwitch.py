@@ -28,9 +28,9 @@ now = datetime.now()
 # print("now = ", now.year)
 # print(type(now.year))
 
-date1 = datetime(now.year, now.month, now.hour, 10, 0, 0)
-date2 = datetime(now.year, now.month, now.hour, 14, 0, 0)
-date3 = datetime(now.year, now.month, now.hour, 16, 0, 0)
+date1 = datetime(now.year, now.month, now.date, 10, 0, 0)
+date2 = datetime(now.year, now.month, now.date, 14, 0, 0)
+date3 = datetime(now.year, now.month, now.date, 16, 0, 0)
 
 isOn = False
 while True:
