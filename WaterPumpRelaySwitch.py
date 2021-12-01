@@ -22,7 +22,7 @@ def time_in_range(start, end, x):
 # print("Today date is: ", today.year)
 # print(type(today.month))
 
-now = datetime.now()
+
 # print("now = ", now)
 # print(type(now))
 # print("now = ", now.hour)
@@ -30,12 +30,12 @@ now = datetime.now()
 # print("now = ", now.year)
 # print(type(now.year))
 
-date1 = datetime(now.year, now.month, now.day, 10, 0, 0)
-date2 = datetime(now.year, now.month, now.day, 14, 0, 0)
-date3 = datetime(now.year, now.month, now.day, 16, 0, 0)
 
 while True:
-
+    now = datetime.now()
+    date1 = datetime(now.year, now.month, now.day, 10, 0, 0)
+    date2 = datetime(now.year, now.month, now.day, 14, 0, 0)
+    date3 = datetime(now.year, now.month, now.day, 16, 0, 0)
     if time_in_range(date1, date1 + timedelta(minutes=1), now):
 
         # turn on led
