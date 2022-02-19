@@ -56,4 +56,4 @@ while True:
         GPIO.output(13, GPIO.HIGH)  # Turn on
         time.sleep(60)  # Sleep for 60 second
         GPIO.output(13, GPIO.LOW)  # Turn off
-    time.sleep(5)
+    time.sleep(1)

@@ -140,6 +140,36 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+      <div class="row">
+                        <div class="col-12">
+                            <!-- interactive chart -->
+                            <div class="card card-primary card-outline">
+                                <div class="card-header">
+                                    <h3 class="card-title">
+                                        <i class="far fa-chart-bar"></i> Interactive Area Chart
+                                    </h3>
+
+                                    <div class="card-tools">
+                                        Real time
+                                        <div class="btn-group" id="realtime" data-toggle="btn-toggle">
+                                            <button type="button" class="btn btn-default btn-sm active" data-toggle="on">On</button>
+                                            <button type="button" class="btn btn-default btn-sm" data-toggle="off">Off</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div id="interactive" style="height: 300px;">
+                                    <canvas id="myChart"></canvas>
+                                  </div>
+                                </div>
+                                <!-- /.card-body-->
+                            </div>
+                            <!-- /.card -->
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <!-- /.row -->
         <div class="row">
           <div class="col-12">
             
@@ -160,14 +190,14 @@
                   </tr>
                   </thead>
                   <tbody>
-                   <?php
+                   <?php                 
                     //Retrieve all records and display them
                     $result = pg_query($con, "Select * from datacollect order by id");
 
                     // Used for row color toggle
                     $oddrow = true;
                     
-
+                    
                     //process every record
                     while( $row = pg_fetch_array($result) )
                     {
@@ -190,7 +220,7 @@
                         
                         echo '</tr>';
                     }
-                ?>
+?>         
                   </tbody>
                  
                 </table>
@@ -244,6 +274,9 @@
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
+
+<script crossorigin="anonymous" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+<script src="GraphHourly.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- Page specific script -->
