@@ -190,37 +190,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                   <?php                 
-                    //Retrieve all records and display them
-                    $result = pg_query($con, "Select * from datacollect order by id");
-
-                    // Used for row color toggle
-                    $oddrow = true;
-                    
-                    
-                    //process every record
-                    while( $row = pg_fetch_array($result) )
-                    {
-                        if ($oddrow) 
-                        { 
-                            $css_class=' class="table_cells_odd"'; 
-                        }
-                        else
-                        { 
-                            $css_class=' class="table_cells_even"'; 
-                        }
-
-                        $oddrow = !$oddrow;
-
-                        echo '<tr>';
-                        echo '   <td'.$css_class.'>'.$row["date"].'</td>';
-                        echo '   <td'.$css_class.'>'.$row["temperature"].'</td>';
-                        echo '   <td'.$css_class.'>'.$row["humidity"].'</td>';
-                        
-                        
-                        echo '</tr>';
-                    }
-?>         
+                   
                   </tbody>
                  
                 </table>
@@ -275,6 +245,7 @@
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
 
+<script src="AjaxEngineForTable.js" async=true></script>
 <script crossorigin="anonymous" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script src="GraphHourly.js"></script>
 <!-- AdminLTE for demo purposes -->
