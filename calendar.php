@@ -52,13 +52,13 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-        
+        </a>
         <button onclick="window.open('logout.php')">
           <i class="fas fa-sign-out-alt"></i>
       </button>
 
         
-        </a>
+        
       </li>
 
     </ul>

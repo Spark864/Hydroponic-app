@@ -40,7 +40,7 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-     
+<!--      
       
       <li class="nav-item">
         <a class="nav-link" data-widget="fullscreen" href="#" role="button">
@@ -51,16 +51,16 @@
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
           <i class="fas fa-th-large"></i>
         </a>
-      </li>
+      </li> -->
       <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-        
-        <button onclick="window.open('logout.php')">
+        <!-- <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+        </a> -->
+        <button onclick="window.location ='logout.php'">
           <i class="fas fa-sign-out-alt"></i>
       </button>
 
         
-        </a>
+        
       </li>
 
     </ul>
