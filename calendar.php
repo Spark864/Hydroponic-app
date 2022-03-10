@@ -92,7 +92,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="index.php" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+              <i class="nav-icon far fa-calendar-alt" aria-hidden="true"></i>
               <p>
                 Home
               </p>

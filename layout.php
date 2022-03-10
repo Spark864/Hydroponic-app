@@ -32,37 +32,18 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
+     
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
      
       
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-          <i class="fas fa-th-large"></i>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-        
-        <button onclick="window.open('logout.php')">
+     
+
+        <button onclick="window.location ='logout.php'">
           <i class="fas fa-sign-out-alt"></i>
       </button>
-
-        
-        </a>
       </li>
 
     </ul>
@@ -89,6 +70,7 @@
 
       
 
+      
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -96,14 +78,48 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="index.php" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+            <i class="fa fa-home" aria-hidden="true"></i>
               <p>
-                Index
+                Home
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="data.php" class="nav-link">
+            <i class="fa fa-database" aria-hidden="true"></i>
+              <p>
+                Data
               </p>
             </a>
           </li>
           
-          <li class="nav-header">EXAMPLES</li>
+          <li class="nav-item">
+            <a href="control.php" class="nav-link">
+            <i class="fa fa-cog" aria-hidden="true"></i>
+              <p>
+                Control Panel
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="manual.php" class="nav-link">
+            <i class="fa fa-book" aria-hidden="true"></i>
+              <p>
+                Manual
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a href="aboutUs.php" class="nav-link">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+              <p>
+                About Us
+              </p>
+            </a>
+          </li>
          
           
         </ul>
@@ -113,7 +129,51 @@
     <!-- /.sidebar -->
   </aside>
 
-  
+  <!-- Main content -->
+
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Sample</h1>
+          </div>
+          
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    
+    <section class="content">
+        <div class="container-fluid">
+      
+                    <!-- /.row -->
+            <div class="row">
+            <div class="col-12">
+                
+
+                <div class="card">
+                
+                <!-- /.card-header -->
+                <div class="card-body" >
+                    
+                </div>
+                <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+            </div>
+        <!-- /.row -->
+        </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+    <!-- <button onclick="window.open('logout.php')">Logout</button> -->
+
+  </div>
+
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
