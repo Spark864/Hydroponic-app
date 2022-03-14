@@ -1,26 +1,31 @@
 <?php 
     // Start MySQL Connection
     include('connect.php'); 
+    
     $alert= "";
         if(isset($_POST['btn_update'])){
             
-                foreach($_POST['btn_update'] as $updateid){
- 
-                    $action = $_POST['action_'.$updateid];
-                   
-                        $updateUser = "UPDATE controlpanel SET 
-                            action='".$action."'
-                        WHERE id=".$updateid;
-                        pg_query($con,$updateUser);
+                
+            for ($x = 1; $x <= 7; $x++) {
+                $name = 'action' . $x;
+                $action = $_REQUEST[$name];
+                
+                $updateData = "UPDATE controlpanel SET 
+                    action='".$action."'
+                WHERE id=" . $x;
+                pg_query($con,$updateData);
 
-                        $alert = '<div class="alert alert-success" role="alert">Records successfully updated</div>';
-                    
-                }
+                
+              }
 
-               
+
+                    $alert = '<div class="alert alert-success" role="alert">Records successfully updated</div>';
                 
             
-        }
+                
+                }
+
+        
 ?>
 
 <!DOCTYPE html>
@@ -39,33 +44,38 @@
                     <tr style='background: whitesmoke;'>
                         <!-- Check/Uncheck All-->
                         
-                        <th>Id</th>
+                        
                         <th>Object</th>
                         <th>Action</th>
                         
                     </tr>
                     <?php 
-                    $query = "Select * from controlpanel";
+                    $query = "Select * from controlpanel order by id";
                     $result = pg_query($con,$query);
- 
+                    $loop = 0;
                     while($row = pg_fetch_array($result) ){
+                        
                         $id = $row['id'];
                         $object = $row['object'];
                         $action = $row['action'];
-                        
+                        $actionName = 'action' . $row['id'];
+                        $loop = 1 + $loop;
+                        // echo "<script>console.log('Debug Objects: " . $loop . "' );</script>";
                     ?>
                         <tr>
                             
-                            <td><?= $id ?></td>
+                            
                             <td><?= $object ?></td>
                             <td>
-                                <select name= "action">
+                                <select name= <?php
+                                                echo $actionName;
+                                            
+                                        ?>>
                                     <option value="On"
                                         <?php
                                         if($action == 'On')
                                             {
                                                 echo "selected";
-                                                
                                             }
                                             
                                         ?>
@@ -89,6 +99,8 @@
                             
                         </tr>
                     <?php
+                    
+                    // echo "<script>console.log('Debug Objects: " . $loops . "' );</script>";
                     }
                     ?>
                 </table>

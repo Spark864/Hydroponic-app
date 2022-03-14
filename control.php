@@ -3,6 +3,28 @@
     include('connect.php'); 
     
     include('checkLogin.php');
+
+    $alert= "";
+        if(isset($_POST['btn_update'])){
+            
+                
+            for ($x = 1; $x <= 7; $x++) {
+                $name = 'action' . $x;
+                $action = $_REQUEST[$name];
+                
+                $updateData = "UPDATE controlpanel SET 
+                    action='".$action."'
+                WHERE id=" . $x;
+                pg_query($con,$updateData);
+              }
+
+               
+
+                    $alert = '<div class="alert alert-success" role="alert">Records successfully updated</div>';
+                
+            
+                
+                }
 ?>
 
 <!DOCTYPE html>
@@ -157,7 +179,74 @@
                 
                 <!-- /.card-header -->
                 <div class="card-body" >
+                <form method='post' action=''><?php echo $alert; ?>
+                
+                <table class="table table-bordered">
+                    <tr style='background: whitesmoke;'>
+                        <!-- Check/Uncheck All-->
+                        
+                        
+                        <th>Object</th>
+                        <th>Action</th>
+                        
+                    </tr>
+                    <?php 
+                    $query = "Select * from controlpanel order by id";
+                    $result = pg_query($con,$query);
+                    $loop = 0;
+                    while($row = pg_fetch_array($result) ){
+                        
+                        $id = $row['id'];
+                        $object = $row['object'];
+                        $action = $row['action'];
+                        $actionName = 'action' . $row['id'];
+                        $loop = 1 + $loop;
+                        // echo "<script>console.log('Debug Objects: " . $loop . "' );</script>";
+                    ?>
+                        <tr>
+                            
+                            
+                            <td><?= $object ?></td>
+                            <td>
+                                <select name= <?php
+                                                echo $actionName;
+                                            
+                                        ?>>
+                                    <option value="On"
+                                        <?php
+                                        if($action == 'On')
+                                            {
+                                                echo "selected";
+                                            }
+                                            
+                                        ?>
+                                        
+                                    >On</option>
+                                    
+                                    <option value="Off"
+                                    <?php
+                                        if($action == 'Off')
+                                            {
+                                                echo "selected";
+                                                
+                                            }
+                                        ?>
+                                    >Off</option>
+
+                                 </select>
+                               
+                                
+                            </td>
+                            
+                        </tr>
+                    <?php
                     
+                    // echo "<script>console.log('Debug Objects: " . $loops . "' );</script>";
+                    }
+                    ?>
+                </table>
+                <p><input type='submit' value='Update Selected Records' class="btn btn-success" name='btn_update'></p>
+            </form>
                 </div>
                 <!-- /.card-body -->
                 </div>
