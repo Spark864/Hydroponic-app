@@ -1,13 +1,29 @@
 const tableBody = document.querySelector("tbody");
-
+var table = $("#example1").DataTable({
+  responsive: true,
+  lengthChange: false,
+  autoWidth: false,
+  buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+});
+var table2 = $("#example2").DataTable({
+  paging: true,
+  lengthChange: false,
+  searching: false,
+  ordering: true,
+  info: true,
+  autoWidth: false,
+  responsive: true,
+});
 function loadTable() {
   var xhr = new XMLHttpRequest();
   xhr.open("GET", "GetDataForAjax.php", true);
   xhr.onload = function () {
     if (this.status == 200) {
+      table.destroy();
+      table2.destroy();
+      tableBody.innerHTML = "";
       var data = JSON.parse(this.responseText);
       let oddrow = true;
-      tableBody.innerHTML = "";
       data.forEach((item) => {
         let css_class;
         if (oddrow) {
@@ -27,6 +43,25 @@ function loadTable() {
         tableRow.appendChild(tableData2);
         tableRow.appendChild(tableData3);
         tableBody.appendChild(tableRow);
+      });
+      table = $("#example1")
+        .DataTable({
+          responsive: true,
+          lengthChange: false,
+          autoWidth: false,
+          buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"],
+        })
+        .buttons()
+        .container()
+        .appendTo("#example1_wrapper .col-md-6:eq(0)");
+      table2 = $("#example2").DataTable({
+        paging: true,
+        lengthChange: false,
+        searching: false,
+        ordering: true,
+        info: true,
+        autoWidth: false,
+        responsive: true,
       });
     }
   };
