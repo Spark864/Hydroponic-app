@@ -42,7 +42,7 @@
      
 
         <button onclick="window.location ='logout.php'">
-          <i class="fas fa-sign-out-alt"></i>
+          <i class="fas fa-sign-out-alt"></i> Logout
       </button>
       </li>
 

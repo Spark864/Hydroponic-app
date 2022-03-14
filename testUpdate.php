@@ -21,8 +21,6 @@
 
                     $alert = '<div class="alert alert-success" role="alert">Records successfully updated</div>';
                 
-            
-                
                 }
 
         
@@ -50,7 +48,7 @@
                         
                     </tr>
                     <?php 
-                    $query = "Select * from controlpanel order by id";
+                    $query = "Select * from controlpanel where id < 8 order by id ";
                     $result = pg_query($con,$query);
                     $loop = 0;
                     while($row = pg_fetch_array($result) ){
@@ -96,6 +94,7 @@
                                
                                 
                             </td>
+
                             
                         </tr>
                     <?php

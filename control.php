@@ -7,7 +7,9 @@
     $alert= "";
         if(isset($_POST['btn_update'])){
             
-                
+          //Update to database 
+
+          //Turning on/off water pumps and led light 
             for ($x = 1; $x <= 7; $x++) {
                 $name = 'action' . $x;
                 $action = $_REQUEST[$name];
@@ -17,12 +19,28 @@
                 WHERE id=" . $x;
                 pg_query($con,$updateData);
               }
-
-               
-
-                    $alert = '<div class="alert alert-success" role="alert">Records successfully updated</div>';
-                
+          
+          //Set duration and freqency     
+          for ($x = 8; $x <= 10; $x++) {
+            $name = 'duration' . $x;
+            $action = $_REQUEST[$name];
             
+            $updateData = "UPDATE controlpanel SET 
+                action='".$action."'
+            WHERE id=" . $x;
+            pg_query($con,$updateData);
+          }
+
+         
+
+          //Set start time 
+
+              // $time  = $_REQUEST["time11"];
+              
+              // echo "<script>console.log('Debug time: " . $time . "' );</script>";
+              // $sql = "UPDATE controlpanel SET time ='$time' WHERE id = 11";
+              // pg_query($con,$sql);
+                    $alert = '<div class="alert alert-success" role="alert">Records successfully updated</div>';
                 
                 }
 ?>
@@ -64,7 +82,8 @@
      
 
         <button onclick="window.location ='logout.php'">
-          <i class="fas fa-sign-out-alt"></i>
+          <i class="fas fa-sign-out-alt"></i> Logout
+          
       </button>
       </li>
 
@@ -191,16 +210,16 @@
                         
                     </tr>
                     <?php 
-                    $query = "Select * from controlpanel order by id";
+                     $query = "Select * from controlpanel where id < 8 order by id ";
                     $result = pg_query($con,$query);
-                    $loop = 0;
+                    // $loop = 0;
                     while($row = pg_fetch_array($result) ){
                         
                         $id = $row['id'];
                         $object = $row['object'];
                         $action = $row['action'];
-                        $actionName = 'action' . $row['id'];
-                        $loop = 1 + $loop;
+                         //$actionName = 'action' . $row['id'];
+                        // $loop = 1 + $loop;
                         // echo "<script>console.log('Debug Objects: " . $loop . "' );</script>";
                     ?>
                         <tr>
@@ -208,10 +227,7 @@
                             
                             <td><?= $object ?></td>
                             <td>
-                                <select name= <?php
-                                                echo $actionName;
-                                            
-                                        ?>>
+                                <select name= 'action<?= $id ?>'>
                                     <option value="On"
                                         <?php
                                         if($action == 'On')
@@ -239,11 +255,89 @@
                             </td>
                             
                         </tr>
+
+                        
                     <?php
                     
                     // echo "<script>console.log('Debug Objects: " . $loops . "' );</script>";
                     }
+
+                    $query2 = "Select * from controlpanel where id > 7 and id < 10 order by id ";
+                    
+                    $result = pg_query($con,$query2);
+                    while($row = pg_fetch_array($result) ){
+                        
+                      $id = $row['id'];
+                      $object = $row['object'];
+                      $action = $row['action'];
+                      //$actionName = 'action' . $row['id'];
+                      //$loop = 1 + $loop;
+                      // echo "<script>console.log('Debug Objects: " . $loop . "' );</script>";
+                  ?>
+
+                  <tr>
+                  <td><?= $object ?></td>
+                  <td><input type='number' name='duration<?= $id ?>' value='<?= $action ?>' ></td>
+
+                  </tr>
+
+                  <?php
+                    
+                    // echo "<script>console.log('Debug Objects: " . $loops . "' );</script>";
+                    }
+
+                    $query2 = "Select * from controlpanel where id = 10 order by id ";
+                    
+                    $result = pg_query($con,$query2);
+                    while($row = pg_fetch_array($result) ){
+                        
+                      $id = $row['id'];
+                      $object = $row['object'];
+                      $action = $row['action'];
+                      //$actionName = 'action' . $row['id'];
+                      //$loop = 1 + $loop;
+                      // echo "<script>console.log('Debug Objects: " . $loop . "' );</script>";
+                  ?>
+
+                  <tr>
+                  <td><?= $object ?></td>
+                  <td><input type='number' name='duration<?= $id ?>' min="0" max="5" value='<?= $action ?>' ></td>
+
+                  </tr>
+                  <?php
+                    }
+                    $query3 = "Select action from controlpanel where id = 10";
+                    
+                    $result2 = pg_query($con,$query3);
+                    
+                    echo "<script>console.log('Debug Objects1: " . $result2 . "' );</script>";
+                    
+                    $freq = pg_fetch_array($result2); 
+
+                    $startTime = (int)$freq['action'] + 10;
+
+                    echo "<script>console.log('Debug Objects2: " . $startTime . "' );</script>";
+
+                    $query4 = "Select * from controlpanel where id > 10 and id <=" . $startTime . " order by id";
+                    $result3 = pg_query($con,$query4);
+
+                    while($row = pg_fetch_array($result3) ){
+                     
+                      $id = $row['id'];
+                      $object = $row['object'];
+                      $time = $row['time'];
                     ?>
+                    <tr>
+                  <td><?= $object ?></td>
+                  
+                  <td><input type='time' name='time<?= $id ?>' value='<?= $time ?>' ></td>
+
+                  </tr>
+
+                  <?php
+                    }
+                    ?>
+
                 </table>
                 <p><input type='submit' value='Update Selected Records' class="btn btn-success" name='btn_update'></p>
             </form>
