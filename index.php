@@ -229,7 +229,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- Page specific script -->
-<script src="AjaxEngineForTable.js" async=true></script>
 <script>
   
 </script>
