@@ -22,15 +22,6 @@
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
-  <style>
-        
-
-        td {
-        text-align: center;
-        }
-</style>
-
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -41,12 +32,15 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
+     
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
      
+      
+     
+
         <button onclick="window.location ='logout.php'">
           <i class="fas fa-sign-out-alt"></i>
       </button>
@@ -84,7 +78,7 @@
                with font-awesome or any other icon font library -->
                <li class="nav-item">
             <a href="index.php" class="nav-link">
-            <i class="fa fa-home" aria-hidden="true"></i>
+            <i class="fa fa-home" aria-hidden="true"> </i>
               <p>
                 Home
               </p>
@@ -93,7 +87,7 @@
 
           <li class="nav-item">
             <a href="data.php" class="nav-link">
-            <i class="fa fa-database" aria-hidden="true"></i>
+            <i class="fa fa-database" aria-hidden="true"> </i>
               <p>
                 Data
               </p>
@@ -102,7 +96,7 @@
           
           <li class="nav-item">
             <a href="control.php" class="nav-link">
-            <i class="fa fa-cog" aria-hidden="true"></i>
+            <i class="fa fa-cog" aria-hidden="true"> </i>
               <p>
                 Control Panel
               </p>
@@ -111,7 +105,7 @@
 
           <li class="nav-item">
             <a href="manual.php" class="nav-link">
-            <i class="fa fa-book" aria-hidden="true"></i>
+            <i class="fa fa-book" aria-hidden="true"> </i>
               <p>
                 Manual
               </p>
@@ -120,12 +114,13 @@
 
           <li class="nav-item">
             <a href="aboutUs.php" class="nav-link">
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            <i class="fa fa-info-circle" aria-hidden="true"> </i>
               <p>
                 About Us
               </p>
             </a>
           </li>
+         
           
         </ul>
       </nav>
@@ -134,14 +129,15 @@
     <!-- /.sidebar -->
   </aside>
 
-<!-- Main content -->
-<div class="content-wrapper">
+  <!-- Main content -->
+
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Home</h1>
+            <h1>About Us</h1>
           </div>
           
         </div>
@@ -156,21 +152,12 @@
             <div class="row">
             <div class="col-12">
                 
-                <div class="card" style="width: 50%;">
+
+                <div class="card">
                 
                 <!-- /.card-header -->
                 <div class="card-body" >
-                    <table id="example1" class="table" >
-                        <thead>
-                            <tr>
-                                <td><a href="data.php">Data</a></td>
-                                <td><a href="control.php">Control Panel</a></td>
-                                <td><a href="manual.php">Manual</a></td>
-                                <td><a href="aboutUs.php">About Us</a></td>
-                            </tr>
-                        </thead>
                     
-                    </table>
                 </div>
                 <!-- /.card-body -->
                 </div>
@@ -186,7 +173,7 @@
     <!-- <button onclick="window.open('logout.php')">Logout</button> -->
 
   </div>
-  
+
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
@@ -222,16 +209,9 @@
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-
-
-<script crossorigin="anonymous" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-<script src="GraphHourly.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- Page specific script -->
-<script src="AjaxEngineForTable.js" async=true></script>
-<script>
-  
-</script>
+
 </body>
 </html>

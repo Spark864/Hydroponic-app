@@ -22,15 +22,6 @@
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
-
-  <style>
-        
-
-        td {
-        text-align: center;
-        }
-</style>
-
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -41,12 +32,15 @@
       <li class="nav-item">
         <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
       </li>
-      
+     
     </ul>
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
      
+      
+     
+
         <button onclick="window.location ='logout.php'">
           <i class="fas fa-sign-out-alt"></i>
       </button>
@@ -126,6 +120,7 @@
               </p>
             </a>
           </li>
+         
           
         </ul>
       </nav>
@@ -134,14 +129,15 @@
     <!-- /.sidebar -->
   </aside>
 
-<!-- Main content -->
-<div class="content-wrapper">
+  <!-- Main content -->
+
+  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Home</h1>
+            <h1>Control Panel</h1>
           </div>
           
         </div>
@@ -156,21 +152,12 @@
             <div class="row">
             <div class="col-12">
                 
-                <div class="card" style="width: 50%;">
+
+                <div class="card">
                 
                 <!-- /.card-header -->
                 <div class="card-body" >
-                    <table id="example1" class="table" >
-                        <thead>
-                            <tr>
-                                <td><a href="data.php">Data</a></td>
-                                <td><a href="control.php">Control Panel</a></td>
-                                <td><a href="manual.php">Manual</a></td>
-                                <td><a href="aboutUs.php">About Us</a></td>
-                            </tr>
-                        </thead>
                     
-                    </table>
                 </div>
                 <!-- /.card-body -->
                 </div>
@@ -186,7 +173,7 @@
     <!-- <button onclick="window.open('logout.php')">Logout</button> -->
 
   </div>
-  
+
   <!-- /.content-wrapper -->
   <footer class="main-footer">
     <div class="float-right d-none d-sm-block">
@@ -222,16 +209,9 @@
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-
-
-<script crossorigin="anonymous" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
-<script src="GraphHourly.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- Page specific script -->
-<script src="AjaxEngineForTable.js" async=true></script>
-<script>
-  
-</script>
+
 </body>
 </html>

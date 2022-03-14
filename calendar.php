@@ -52,13 +52,13 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-        
+        </a>
         <button onclick="window.open('logout.php')">
           <i class="fas fa-sign-out-alt"></i>
       </button>
 
         
-        </a>
+        
       </li>
 
     </ul>
@@ -92,7 +92,7 @@
                with font-awesome or any other icon font library -->
           <li class="nav-item">
             <a href="index.php" class="nav-link">
-              <i class="nav-icon far fa-calendar-alt"></i>
+              <i class="nav-icon far fa-calendar-alt" aria-hidden="true"></i>
               <p>
                 Home
               </p>

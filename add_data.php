@@ -12,5 +12,5 @@
     pg_query($SQL);
 
     // Go to the review_data.php (optional)
-    header("Location: index.php");
+    header("Location: data.php");
 ?>
