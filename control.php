@@ -305,34 +305,34 @@
 
                   </tr>
                   <?php
-                    }
-                    $query3 = "Select action from controlpanel where id = 10";
+                    // }
+                    // $query3 = "Select action from controlpanel where id = 10";
                     
-                    $result2 = pg_query($con,$query3);
+                    // $result2 = pg_query($con,$query3);
                     
-                    echo "<script>console.log('Debug Objects1: " . $result2 . "' );</script>";
+                    // // echo "<script>console.log('Debug Objects1: " . $result2 . "' );</script>";
                     
-                    $freq = pg_fetch_array($result2); 
+                    // $freq = pg_fetch_array($result2); 
 
-                    $startTime = (int)$freq['action'] + 10;
+                    // $startTime = (int)$freq['action'] + 10;
 
-                    echo "<script>console.log('Debug Objects2: " . $startTime . "' );</script>";
+                    // //echo "<script>console.log('Debug Objects2: " . $startTime . "' );</script>";
 
-                    $query4 = "Select * from controlpanel where id > 10 and id <=" . $startTime . " order by id";
-                    $result3 = pg_query($con,$query4);
+                    // $query4 = "Select * from controlpanel where id > 10 and id <=" . $startTime . " order by id";
+                    // $result3 = pg_query($con,$query4);
 
-                    while($row = pg_fetch_array($result3) ){
+                    // while($row = pg_fetch_array($result3) ){
                      
-                      $id = $row['id'];
-                      $object = $row['object'];
-                      $time = $row['time'];
+                    //   $id = $row['id'];
+                    //   $object = $row['object'];
+                    //   $time = $row['time'];
                     ?>
-                    <tr>
+                    <!-- <tr>
                   <td><?= $object ?></td>
                   
                   <td><input type='time' name='time<?= $id ?>' value='<?= $time ?>' ></td>
 
-                  </tr>
+                  </tr> -->
 
                   <?php
                     }
