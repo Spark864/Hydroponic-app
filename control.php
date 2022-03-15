@@ -5,44 +5,64 @@
     include('checkLogin.php');
 
     $alert= "";
-        if(isset($_POST['btn_update'])){
-            
-          //Update to database 
+          if(isset($_POST['btn_update'])){
+              
+            //Update to database 
 
-          //Turning on/off water pumps and led light 
-            for ($x = 1; $x <= 7; $x++) {
-                $name = 'action' . $x;
+            //Turning on/off water pumps and led light 
+              for ($x = 1; $x <= 7; $x++) {
+                  $name = 'action' . $x;
+                  $action = $_REQUEST[$name];
+                  
+                  $updateData = "UPDATE controlpanel SET 
+                      action='".$action."'
+                  WHERE id=" . $x;
+                  pg_query($con,$updateData);
+                }
+            
+            //Set duration and freqency     
+              for ($x = 8; $x <= 10; $x++) {
+                $name = 'duration' . $x;
                 $action = $_REQUEST[$name];
                 
                 $updateData = "UPDATE controlpanel SET 
                     action='".$action."'
                 WHERE id=" . $x;
                 pg_query($con,$updateData);
-              }
-          
-          //Set duration and freqency     
-          for ($x = 8; $x <= 10; $x++) {
-            $name = 'duration' . $x;
-            $action = $_REQUEST[$name];
+            }
+            $alert = '<div class="alert alert-success" role="alert">Actions successfully updated</div>';
             
-            $updateData = "UPDATE controlpanel SET 
-                action='".$action."'
-            WHERE id=" . $x;
-            pg_query($con,$updateData);
           }
 
-         
-
           //Set start time 
-
-              // $time  = $_REQUEST["time11"];
-              
-              // echo "<script>console.log('Debug time: " . $time . "' );</script>";
-              // $sql = "UPDATE controlpanel SET time ='$time' WHERE id = 11";
-              // pg_query($con,$sql);
-                    $alert = '<div class="alert alert-success" role="alert">Records successfully updated</div>';
+          if(isset($_POST['update_time'])){
+            echo "<script>console.log('Debug time: " . $time . "' );</script>";
+            $query = "Select * from controlpanel where id = 10";
+            $result = pg_query($con,$query);
+            
+            $row = pg_fetch_array($result);
                 
-                }
+                $id = $row['id'];
+                $object = $row['object'];
+                $action = $row['action'];
+
+                echo "<script>console.log('Debug time: " . $action . "' );</script>";
+                $number = (int)$action + 10;
+                echo "<script>console.log('Debug number: " . $number . "' );</script>";
+            for ($x = 11; $x <= $number; $x++) {
+            
+            $currentTime = 'time' . $x;
+            $time  = $_REQUEST[$currentTime];
+              
+            //echo "<script>console.log('Debug time: " . $time . "' );</script>";
+
+            $sql = "UPDATE controlpanel SET time ='$time' WHERE id =" . $x;
+            pg_query($con,$sql);
+          
+            $alert = '<div class="alert alert-success" role="alert">Times successfully updated</div>';
+            }
+          }
+                
 ?>
 
 <!DOCTYPE html>
@@ -305,7 +325,56 @@
 
                   </tr>
                   <?php
+                    // }
+                    // $query3 = "Select action from controlpanel where id = 10";
+                    
+                    // $result2 = pg_query($con,$query3);
+                    
+                    // // echo "<script>console.log('Debug Objects1: " . $result2 . "' );</script>";
+                    
+                    // $freq = pg_fetch_array($result2); 
+
+                    // $startTime = (int)$freq['action'] + 10;
+
+                    // //echo "<script>console.log('Debug Objects2: " . $startTime . "' );</script>";
+
+                    // $query4 = "Select * from controlpanel where id > 10 and id <=" . $startTime . " order by id";
+                    // $result3 = pg_query($con,$query4);
+
+                    // while($row = pg_fetch_array($result3) ){
+                     
+                    //   $id = $row['id'];
+                    //   $object = $row['object'];
+                    //   $time = $row['time'];
+                    ?>
+                  <!-- <tr>
+                  <td><?= $object ?></td>
+                  
+                  <td><input type='time' name='time<?= $id ?>' value='<?= $time ?>' ></td>
+
+                  </tr> -->
+
+                  <?php
                     }
+                    ?>
+
+                </table>
+
+                <p><input type='submit' value='Update Actions' class="btn btn-success" name='btn_update'></p>
+            </form>
+
+            <form method='post' action=''>
+                
+                <table class="table table-bordered">
+                    <tr style='background: whitesmoke;'>
+                        <!-- Check/Uncheck All-->
+                        
+                        <th>Object</th>
+                        <th>Time</th>
+                        
+                    </tr>
+                    <?php
+                    
                     $query3 = "Select action from controlpanel where id = 10";
                     
                     $result2 = pg_query($con,$query3);
@@ -330,17 +399,15 @@
                   <tr>
                   <td><?= $object ?></td>
                   
-                  <td><input type='time' name='time<?= $id ?>' value='<?= $time ?>' ></td>
+                  <td><input type='time' name='time<?= $id ?>' step='any' value='<?= $time ?>' ></td>
 
                   </tr>
-
                   <?php
                     }
                     ?>
-
                 </table>
 
-                <p><input type='submit' value='Update Selected Records' class="btn btn-success" name='btn_update'></p>
+               <p><input type='submit' value='Update Times' class="btn btn-success" name='update_time'></p>
             </form>
                 </div>
                 <!-- /.card-body -->
