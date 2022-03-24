@@ -165,6 +165,84 @@
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                  <div class="inner">
+                      <h3>35<sup style="font-size: 20px">%</sup></h3>
+
+                      <p>Humidity</p>
+                  </div>
+                  <div class="icon">
+                      <i class="ion ion-bag"></i>
+                  </div>
+                  <a id="humiditylink" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                  <div class="inner">
+                      <h3>24</h3>
+
+                      <p>Temperature</p>
+                  </div>
+                  <div class="icon">
+                      <i class="ion ion-stats-bars"></i>
+                  </div>
+                  <a id="temperaturelink" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                  <div class="inner">
+                      <h3>7.7</h3>
+
+                      <p>PH</p>
+                  </div>
+                  <div class="icon">
+                      <i class="ion ion-person-add"></i>
+                  </div>
+                  <a id="phlink" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                  <div class="inner">
+                      <h3>65</h3>
+
+                      <p>PPM</p>
+                  </div>
+                  <div class="icon">
+                      <i class="ion ion-pie-graph"></i>
+                  </div>
+                  <a id="ppmlink" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+              <!-- small box -->
+              <div class="small-box bg-info">
+                  <div class="inner">
+                      <h3>12</h3>
+
+                      <p>Sunlight</p>
+                  </div>
+                  <div class="icon">
+                      <i class="ion ion-bag"></i>
+                  </div>
+                  <a id="sunlightlink" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              </div>
+          </div>
+          <!-- ./col -->
+        </div>
       <div class="row">
                         <div class="col-12">
                             <!-- interactive chart -->
@@ -175,16 +253,23 @@
                                     </h3>
 
                                     <div class="card-tools">
-                                        Real time
+                                        Parameters
                                         <div class="btn-group" id="realtime" data-toggle="btn-toggle">
-                                            <button type="button" class="btn btn-default btn-sm active" data-toggle="on">On</button>
-                                            <button type="button" class="btn btn-default btn-sm" data-toggle="off">Off</button>
+                                            <button type="button" class="btn btn-default btn-sm active" data-toggle="humidity">Humidity</button>
+                                            <button type="button" class="btn btn-default btn-sm" data-toggle="temperature">Temperature</button>
+                                            <button type="button" class="btn btn-default btn-sm" data-toggle="ph">PH</button>
+                                            <button type="button" class="btn btn-default btn-sm" data-toggle="ppm">PPM</button>
+                                            <button type="button" class="btn btn-default btn-sm" data-toggle="sunlight">Sunlight</button>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="card-body">
                                     <div id="interactive" style="height: 300px;">
                                     <canvas id="myChart"></canvas>
+                                    <canvas id="myChart2" style="display:none;"></canvas>
+                                    <canvas id="myChart3" style="display:none;"></canvas>
+                                    <canvas id="myChart4" style="display:none;"></canvas>
+                                    <canvas id="myChart5" style="display:none;"></canvas>
                                   </div>
                                 </div>
                                 <!-- /.card-body-->
@@ -277,7 +362,53 @@
 <!-- Page specific script -->
 <script src="AjaxEngineForTable.js" async=true></script>
 <script>
-  
+    const boxes = document.querySelectorAll(".small-box-footer");
+  console.log(boxes);
+  boxes[0].addEventListener("click", () => {
+    if (ctx.style.display === "none") {
+      ctx2.style.display = "none";
+      ctx3.style.display = "none";
+      ctx4.style.display = "none";
+      ctx5.style.display = "none";
+      ctx.style.display = "block";
+    }
+  });
+  boxes[1].addEventListener("click", () => {
+    if (ctx2.style.display === "none") {
+      ctx.style.display = "none";
+      ctx3.style.display = "none";
+      ctx4.style.display = "none";
+      ctx5.style.display = "none";
+      ctx2.style.display = "block";
+    }
+  });
+  boxes[2].addEventListener("click", () => {
+    if (ctx3.style.display === "none") {
+      ctx.style.display = "none";
+      ctx2.style.display = "none";
+      ctx4.style.display = "none";
+      ctx5.style.display = "none";
+      ctx3.style.display = "block";
+    }
+  });
+  boxes[3].addEventListener("click", () => {
+    if (ctx4.style.display === "none") {
+      ctx.style.display = "none";
+      ctx2.style.display = "none";
+      ctx3.style.display = "none";
+      ctx5.style.display = "none";
+      ctx4.style.display = "block";
+    }
+  });
+  boxes[4].addEventListener("click", () => {
+    if (ctx5.style.display === "none") {
+        ctx.style.display = "none";
+        ctx2.style.display = "none";
+        ctx3.style.display = "none";
+        ctx4.style.display = "none";
+        ctx5.style.display = "block";
+      }
+  });
 </script>
 </body>
 </html>
