@@ -1,0 +1,126 @@
+//Water Pump 1 & 2
+ - water to plants
+
+//Check on/off
+var wp = 0;
+if (wp1 == on){
+    wp = 1;
+}
+if (wp2 == on){
+    wp = 2;
+}
+
+if (wp1 == on and wp2 == on){
+    wp = 3;
+}
+
+// When the wp is on 
+if (wp > 1){
+    var frequency = get it from database 
+    var timer[] = null;
+    //how long to turn on the wp
+    duration = get it from databse;
+
+    for (int x = 0; x < frequency; x++){
+        //get all timer that based on the frequency
+        timer[x] = time;
+    }
+
+    Adjust the time +/- 20 seconds
+    
+    //If the timer is between the current time and current time + 20 seconds
+    if (timer [x] < current_time && (current_time + 20s)> timer[x]){
+    //switch case 
+        match wp:
+        case 1:
+            turn on wp1
+            time.sleep(duration)
+            turn off wp1
+        case 2:
+            turn on wp2
+            time.sleep(duration)
+            turn off wp2
+
+        case 3:
+            turn on wp1 and wp2 
+            time.sleep(duration)
+            turn off wp1 and wp2
+        case _:
+            raise ValueError("Not Working")
+    }
+}
+
+Water Pump 3
+ - water from bucket to bucket
+
+//Check wp3 on/off
+ if (wp3 == On) {
+     duration3 = get it from database 
+     timer = get it from databaes 
+
+     adjust the time +/- 20 seconds
+    if (timer < current_time && (current_time + 20s) > timer){
+        turn on wp3 
+        time.sleep(duration3)
+        turn off wp3
+    }
+ }
+
+LED Light
+//Check led on/off
+//LED mode
+    - 1: default light mode for sunlight
+    - 2: purple mode for temperature
+
+    var mode = get it from db
+    if (led == on){
+        if (current_temperature < preset temperature){
+            if (mode == 1){
+                turn on the led 
+                2 clicks for switch the mode 2
+                update mode == 2 to database 
+                time.sleep(duration)
+                turn off the led
+            }
+
+            if (mode == 2){
+                turn on the led
+                time.sleep(duration)
+                turn off the led
+            }
+        }
+
+    var frequency = get it from database 
+    var timer[] = null;
+    //how long to turn on the led
+    duration = get it from databse;
+
+    for (int x = 0; x < frequency; x++){
+        //get all timer that based on the frequency
+        timer[x] = time;
+    }
+
+    Adjust the time +/- 20 seconds
+    
+    //If the timer is between the current time and current time + 20 seconds
+    if (timer [x] < current_time && (current_time + 20s)> timer[x]){
+
+        if (mode == 1){
+            turn on led
+            time.sleep(duration)
+            turn off led
+        }
+
+        if (mode == 2){
+            turn on led 
+            1 click to switch the mode 1
+            update mode = 1 to database
+            time.sleep(duration)
+            turn off led
+        }
+    }
+
+
+    }
+
+
