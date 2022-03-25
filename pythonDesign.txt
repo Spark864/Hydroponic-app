@@ -73,7 +73,7 @@ LED Light
     - 2: purple mode for temperature
 
     var mode = get it from db
-    if (led == on){
+    
         if (current_temperature < preset temperature){
             if (mode == 1){
                 turn on the led 
@@ -120,6 +120,6 @@ LED Light
         }
     }
 
-    }
+    
 
 
