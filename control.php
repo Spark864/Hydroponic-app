@@ -771,7 +771,7 @@
                     
                   <?php
                     }
-                     $query4 = "Select action from controlpanel where id = 4";
+                     $query4 = "Select action from controlpanel where id = 18";
                     
                     $frequency = pg_query($con,$query4);
                     
@@ -779,11 +779,11 @@
                     
                     $freq = pg_fetch_array($frequency); 
 
-                    $startTime = (int)$freq['action'] + 6;
+                    $startTime = (int)$freq['action'] + 20;
 
                     //echo "<script>console.log('Debug Objects2: " . $startTime . "' );</script>";
 
-                    $query5 = "Select * from controlpanel where id > 6 and id <=" . $startTime . " order by id";
+                    $query5 = "Select * from controlpanel where id > 20 and id <=" . $startTime . " order by id";
                     $result3 = pg_query($con,$query5);
 
                     while($row = pg_fetch_array($result3) ){
