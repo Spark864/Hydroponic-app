@@ -69,15 +69,21 @@ if (wp > 1){
     //switch case 
         match wp:
         case 1:
+            //update database
+            Update controlpanel SET action = 'On' Where id = 1
             turn on wp1
             time.sleep(duration)
             turn off wp1
         case 2:
+        //update database
+            Update controlpanel SET action = 'On' Where id = 2
             turn on wp2
             time.sleep(duration)
             turn off wp2
-
         case 3:
+        //update database
+            Update controlpanel SET action = 'On' Where id = 1
+            Update controlpanel SET action = 'On' Where id = 2
             turn on wp1 and wp2 
             time.sleep(duration)
             turn off wp1 and wp2
