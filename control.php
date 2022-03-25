@@ -5,12 +5,12 @@
     include('checkLogin.php');
 
     $alert= "";
+    // ------------------Water Pump 1 and 2--------------------------------
           if(isset($_POST['update_wp'])){
+           
               
-            //Update to database 
 
-            //Turning on/off water pumps and led light 
-              for ($x = 1; $x <= 7; $x++) {
+                for ($x = 1; $x <= 4; $x++) {
                   $name = 'action' . $x;
                   $action = $_REQUEST[$name];
                   
@@ -20,24 +20,28 @@
                   pg_query($con,$updateData);
                 }
             
-            //Set duration and freqency     
-              for ($x = 8; $x <= 10; $x++) {
-                $name = 'duration' . $x;
-                $action = $_REQUEST[$name];
-                
-                $updateData = "UPDATE controlpanel SET 
-                    action='".$action."'
-                WHERE id=" . $x;
-                pg_query($con,$updateData);
-            }
-            $alert = '<div class="alert alert-success" role="alert">Actions successfully updated</div>';
+            $alert = '<div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Successfully Updated</strong>
+          </div>';
             
           }
+          
+          // ------------------Water Pump timer--------------------------------
+          if(isset($_POST['update_timer_wp'])){
+           
+            for ($x = 5; $x <= 6; $x++) {
+              $name = 'action' . $x;
+              $action = $_REQUEST[$name];
+              
+              $updateData = "UPDATE controlpanel SET 
+                  action='".$action."'
+              WHERE id=" . $x;
+              pg_query($con,$updateData);
+             
+            }
 
-          //Set start time 
-          if(isset($_POST['update_time'])){
-            echo "<script>console.log('Debug time: " . $time . "' );</script>";
-            $query = "Select * from controlpanel where id = 10";
+            $query = "Select * from controlpanel where id = 4";
             $result = pg_query($con,$query);
             
             $row = pg_fetch_array($result);
@@ -46,22 +50,112 @@
                 $object = $row['object'];
                 $action = $row['action'];
 
-                echo "<script>console.log('Debug time: " . $action . "' );</script>";
-                $number = (int)$action + 10;
-                echo "<script>console.log('Debug number: " . $number . "' );</script>";
-            for ($x = 11; $x <= $number; $x++) {
+                //echo "<script>console.log('Debug action: " . $action . "' );</script>";
+                $number = (int)$action + 6;
+               
+
+            for ($x = 7; $x <= $number; $x++) {
             
             $currentTime = 'time' . $x;
             $time  = $_REQUEST[$currentTime];
               
-            //echo "<script>console.log('Debug time: " . $time . "' );</script>";
+            
 
             $sql = "UPDATE controlpanel SET time ='$time' WHERE id =" . $x;
             pg_query($con,$sql);
           
-            $alert = '<div class="alert alert-success" role="alert">Times successfully updated</div>';
-            }
+            $alert = '<div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Successfully Updated</strong>
+          </div>';
           }
+        }
+        //------------------Water Pump 3--------------------------------
+          //Set start time 
+
+          if(isset($_POST['update_wp3'])){
+            
+            for ($x = 12; $x <= 13; $x++) {
+              $name = 'action' . $x;
+              $action = $_REQUEST[$name];
+              
+              $updateData = "UPDATE controlpanel SET 
+                  action='".$action."'
+              WHERE id=" . $x;
+              pg_query($con,$updateData);
+             
+            }
+
+            $currentTime = 'time14';
+            $time  = $_REQUEST[$currentTime];
+              
+            //echo "<script>console.log('Debug time: " . $time . "' );</script>";
+
+            $sql = "UPDATE controlpanel SET time ='$time' WHERE id = 14";
+            pg_query($con,$sql);
+          
+            $alert = '<div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Successfully Updated</strong>
+          </div>';
+            
+          }
+
+        //------------------LED Light--------------------------------
+        if(isset($_POST['update_led'])){
+           
+          for ($x = 15; $x <= 18; $x++) {
+              $name = 'action' . $x;
+              $action = $_REQUEST[$name];
+              
+              $updateData = "UPDATE controlpanel SET 
+                  action='".$action."'
+              WHERE id=" . $x;
+              pg_query($con,$updateData);
+            }
+        
+            $alert = '<div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Successfully Updated</strong>
+          </div>';
+        
+      }
+
+      //------------------LED Light Timer--------------------------------
+      if(isset($_POST['update_time_led'])){
+           
+        
+
+        $query = "Select * from controlpanel where id = 18";
+        $result = pg_query($con,$query);
+        
+        $row = pg_fetch_array($result);
+            
+            $id = $row['id'];
+            $object = $row['object'];
+            $action = $row['action'];
+
+          
+            $number = (int)$action + 20;
+           
+
+        for ($x = 21; $x <= $number; $x++) {
+        
+        $currentTime = 'time' . $x;
+        $time  = $_REQUEST[$currentTime];
+          
+       
+        $sql = "UPDATE controlpanel SET time ='$time' WHERE id =" . $x;
+        pg_query($con,$sql);
+      
+        $alert = '<div class="alert alert-success" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>Successfully Updated</strong>
+          </div>';
+      }
+    }
+
+
                 
 ?>
 
@@ -82,6 +176,79 @@
   <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  <script>
+    window.setTimeout(function() {
+    $(".alert").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 4000);
+
+  </script>
+  <style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -271,7 +438,7 @@
                                     >Off</option>
 
                                  </select>
-                               
+                                 
                                 
                             </td>
                             
@@ -291,14 +458,12 @@
                       $id = $row['id'];
                       $object = $row['object'];
                       $action = $row['action'];
-                      //$actionName = 'action' . $row['id'];
-                      //$loop = 1 + $loop;
-                      // echo "<script>console.log('Debug Objects: " . $loop . "' );</script>";
+                      
                   ?>
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='duration<?= $id ?>' value='<?= $action ?>' ></td>
+                  <td><input type='number' name='action<?= $id ?>' value='<?= $action ?>' min="0"></td>
 
                   </tr>
 
@@ -320,7 +485,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='duration<?= $id ?>' min="0" max="5" value='<?= $action ?>' ></td>
+                  <td><input type='number' name='action<?= $id ?>' min="1" max="5" value='<?= $action ?>' ></td>
 
                   </tr>
                   <?php
@@ -338,7 +503,7 @@
 
                 </table>
 
-                <p><input type='submit' value='Update Actions' class="btn btn-success" name='update_wp'></p>
+                <p><input type='submit' value='Update' class="btn btn-success" name='update_wp'></p>
             </form>
 
             <!------------------------------------- Set Timer - Water Pump 1 & 2 ------------------------------------------>
@@ -352,35 +517,7 @@
                         <th>Timer</th>
                         
                     </tr>
-                    <!-- <?php
-                    
-                    // $query3 = "Select action from controlpanel where id = 10";
-                    
-                    // $result2 = pg_query($con,$query3);
-                    
-                    // // echo "<script>console.log('Debug Objects1: " . $result2 . "' );</script>";
-                    
-                    // $freq = pg_fetch_array($result2); 
-
-                    // $startTime = (int)$freq['action'] + 10;
-
-                    // //echo "<script>console.log('Debug Objects2: " . $startTime . "' );</script>";
-
-                    // $query4 = "Select * from controlpanel where id > 10 and id <=" . $startTime . " order by id";
-                    // $result3 = pg_query($con,$query4);
-
-                    // while($row = pg_fetch_array($result3) ){
-                     
-                    //   $id = $row['id'];
-                    //   $object = $row['object'];
-                    //   $time = $row['time'];
-                    ?> -->
-                  <!-- <tr>
-                  <td><?= $object ?></td>
-                  
-                  <td><input type='time' name='time<?= $id ?>' step='any' value='<?= $time ?>' ></td>
-
-                  </tr> -->
+                   
                   <?php 
                      $query3 = "Select * from controlpanel where id > 4 and id < 7 order by id ";
                     $result = pg_query($con,$query3);
@@ -390,6 +527,7 @@
                         $id = $row['id'];
                         $object = $row['object'];
                         $action = $row['action'];
+                        //echo "<script>console.log('Debug Objects1: " . $id . "' );</script>";
                          
                     ?>
                         <tr>
@@ -462,7 +600,7 @@
                     ?>
                 </table>
 
-               <p><input type='submit' value='Update Times' class="btn btn-success" name='update_time_led'></p>
+               <p><input type='submit' value='Update' class="btn btn-success" name='update_timer_wp'></p>
             </form>
 
             <!------------------------------------- Water Pump 3 ------------------------------------------>
@@ -541,7 +679,7 @@
 
                 <tr>
                 <td><?= $object ?></td>
-                <td><input type='number' name='duration<?= $id ?>' value='<?= $action ?>' ></td>
+                <td><input type='number' name='action<?= $id ?>' value='<?= $action ?>' min="0"></td>
 
                 </tr>      
                     
@@ -568,11 +706,11 @@
                     ?>
                 </table>
                     
-               <p><input type='submit' value='Update Times' class="btn btn-success" name='update_wp3'></p>
+               <p><input type='submit' value='Update' class="btn btn-success" name='update_wp3'></p>
             </form>
 
              <!------------------------------------- LED Light ------------------------------------------>
-            <form method='post' action=''><?php echo $alert; ?>
+            <form method='post' action=''>
                 <h3>LED Light</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
@@ -620,8 +758,8 @@
                                         ?>
                                     >Off</option>
 
-                                 </select>
-                               
+                                 </select> 
+                                
                                 
                             </td>
                             
@@ -648,7 +786,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='duration<?= $id ?>' value='<?= $action ?>' ></td>
+                  <td><input type='number' name='action<?= $id ?>' step="any" min="0" value='<?= $action ?>' ></td>
 
                   </tr>
 
@@ -669,7 +807,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='duration<?= $id ?>' value='<?= $action ?>' ></td>
+                  <td><input type='number' name='action<?= $id ?>' min="0" value='<?= $action ?>' ></td>
 
                   </tr>
                   <?php
@@ -689,7 +827,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='duration<?= $id ?>' min="0" max="5" value='<?= $action ?>' ></td>
+                  <td><input type='number' name='action<?= $id ?>' min="1" max="5" value='<?= $action ?>' ></td>
 
                   </tr>
                   <?php
@@ -707,7 +845,7 @@
 
                 </table>
 
-                <p><input type='submit' value='Update Actions' class="btn btn-success" name='update_led'></p>
+                <p><input type='submit' value='Update' class="btn btn-success" name='update_led'></p>
             </form>
 
              <!------------------------------------- Set Timer - LED Light ------------------------------------------>
@@ -722,55 +860,8 @@
                         
                     </tr>
                     
-                  <?php 
-                     $query3 = "Select * from controlpanel where id > 4 and id < 7 order by id ";
-                    $result = pg_query($con,$query3);
-                   
-                    while($row = pg_fetch_array($result) ){
-                        
-                        $id = $row['id'];
-                        $object = $row['object'];
-                        $action = $row['action'];
-                         
-                    ?>
-                        <tr>
-                            
-                            
-                            <td><?= $object ?></td>
-                            <td>
-                                <select name= 'action<?= $id ?>'>
-                                    <option value="On"
-                                        <?php
-                                        if($action == 'On')
-                                            {
-                                                echo "selected";
-                                            }
-                                            
-                                        ?>
-                                        
-                                    >On</option>
-                                    
-                                    <option value="Off"
-                                    <?php
-                                        if($action == 'Off')
-                                            {
-                                                echo "selected";
-                                                
-                                            }
-                                        ?>
-                                    >Off</option>
-
-                                 </select>
-                               
-                                
-                            </td>
-                            
-                        </tr>
-
-                        
-                    
                   <?php
-                    }
+                    
                      $query4 = "Select action from controlpanel where id = 18";
                     
                     $frequency = pg_query($con,$query4);
@@ -803,7 +894,7 @@
                     ?>
                 </table>
 
-               <p><input type='submit' value='Update Times' class="btn btn-success" name='update_time_led'></p>
+               <p><input type='submit' value='Update' class="btn btn-success" name='update_time_led'></p>
             </form>
                 </div>
                 <!-- /.card-body -->
