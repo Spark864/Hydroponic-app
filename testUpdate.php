@@ -3,7 +3,7 @@
     include('connect.php'); 
     
     $alert= "";
-        if(isset($_POST['btn_update'])){
+        if(isset($_POST['update_wp'])){
             
                 
             for ($x = 1; $x <= 7; $x++) {
@@ -103,7 +103,7 @@
                     }
                     ?>
                 </table>
-                <p><input type='submit' value='Update Selected Records' class="btn btn-success" name='btn_update'></p>
+                <p><input type='submit' value='Update Selected Records' class="btn btn-success" name='update_wp'></p>
             </form>
 
 <?php
