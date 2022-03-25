@@ -180,73 +180,75 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script>
-    window.setTimeout(function() {
-    $(".alert").fadeTo(500, 0).slideUp(500, function(){
-        $(this).remove(); 
-    });
-}, 4000);
+          window.setTimeout(function() {
+          $(".alert").fadeTo(500, 0).slideUp(500, function(){
+              $(this).remove(); 
+          });
+      }, 4000);
 
-  </script>
-  <style>
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
+        </script>
+        <style>
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
 
-.switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
+      .switch input { 
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
 
-.slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
 
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
-}
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
 
-input:checked + .slider {
-  background-color: #2196F3;
-}
+      input:checked + .slider {
+        background-color: #2196F3;
+      }
 
-input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
-}
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+      }
 
-input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
 
-/* Rounded sliders */
-.slider.round {
-  border-radius: 34px;
-}
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
 
-.slider.round:before {
-  border-radius: 50%;
-}
+      .slider.round:before {
+        border-radius: 50%;
+      }
+
+
 </style>
 
 </head>
@@ -378,7 +380,7 @@ input:checked + .slider:before {
       
                     <!-- /.row -->
             <div class="row">
-            <div class="col-12">
+            <div class="col-xs-12">
                 
 
                 <div class="card">
@@ -389,11 +391,10 @@ input:checked + .slider:before {
 
                 <!------------------------------------- Water Pump 1 and 2 ------------------------------------------>
                 <form method='post' action=''><?php echo $alert; ?>
-                
+                <h3>Water Pump 1 & 2</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
                         <!-- Check/Uncheck All-->
-                        
                         
                         <th>Object</th>
                         <th>Action</th>
@@ -508,7 +509,7 @@ input:checked + .slider:before {
 
             <!------------------------------------- Set Timer - Water Pump 1 & 2 ------------------------------------------>
             <form method='post' action=''>
-                <h3>Set Timer - Water Pump 1 and 2</h3>
+                <h3>Set Timer - Water Pump 1 & 2</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
                         <!-- Check/Uncheck All-->
