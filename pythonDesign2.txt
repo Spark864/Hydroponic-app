@@ -1,0 +1,32 @@
+Water Pump 1 & 2
+- Water to plants
+
+// Check on/off
+
+var wp = 0 
+
+if (wp1 == on and wp2 == on){
+    turn on wp1 and wp2
+    time.sleep(duration)
+    turn off wp1 and wp2
+    //update DB
+    Update controlpanel SET action = 'Off' Where id = 1
+    Update controlpanel SET action = 'Off' Where id = 2
+}
+else if (wp1 == on){
+    turn on wp1
+    time.sleep(duration)
+    turn off wp1 
+    //update DB
+    Update controlpanel SET action = 'Off' Where id = 1
+}
+
+else if (wp2 == on){
+    turn on wp1
+    time.sleep(duration)
+    turn off wp1 
+    //update DB
+    Update controlpanel SET action = 'Off' Where id = 2
+}
+
+
