@@ -156,11 +156,11 @@
             <div class="row">
             <div class="col-12">
                 
-                <div class="card" style="width: 50%;">
+                <div class="card">
                 
                 <!-- /.card-header -->
                 <div class="card-body" >
-                    <table id="example1" class="table" >
+                    <table id="table1" class="table" >
                         <thead>
                             <tr>
                                 <td><a href="data.php">Data</a></td>
