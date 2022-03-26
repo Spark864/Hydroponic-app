@@ -30,7 +30,6 @@ for x in mycursor.fetchall():
 
 # WP1 On/Off
 
-
 # WP2 On/Off
 
 # Timer of WP1 or WP2
