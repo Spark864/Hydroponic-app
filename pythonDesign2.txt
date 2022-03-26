@@ -179,3 +179,20 @@ LED Light
     }
 
 
+wp1 
+wp2 
+wp3
+led
+twp1
+twp2
+twp3
+fled
+
+if wp1 == on
+    durWp1 = 5
+    duration = 5 
+    wp1 = high
+    for x in range()
+    time.sleep(5*60)
+    wp1 = low
+

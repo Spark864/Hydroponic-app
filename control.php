@@ -27,7 +27,7 @@
             
           }
           
-          // ------------------Water Pump timer--------------------------------
+          // ------------------Water Pump 1 & 2 timer--------------------------------
           if(isset($_POST['update_timer_wp'])){
            
             for ($x = 5; $x <= 6; $x++) {
@@ -85,6 +85,10 @@
               pg_query($con,$updateData);
              
             }
+            $name = 'action26';
+            $action = $_REQUEST[$name];
+            $sql = "UPDATE controlpanel SET action ='$action' WHERE id = 26";
+            pg_query($con,$sql);
 
             $currentTime = 'time14';
             $time  = $_REQUEST[$currentTime];
@@ -123,9 +127,15 @@
 
       //------------------LED Light Timer--------------------------------
       if(isset($_POST['update_time_led'])){
-           
-        
-
+       
+          $name = 'action20';
+          $action = $_REQUEST[$name];
+          
+          $updateData = "UPDATE controlpanel SET 
+              action='".$action."'
+          WHERE id=20";
+          pg_query($con,$updateData);
+         
         $query = "Select * from controlpanel where id = 18";
         $result = pg_query($con,$query);
         
@@ -662,9 +672,7 @@
                         </tr>
 
                   <?php
-                    
                   }
-
                   $query2 = "Select * from controlpanel where id = 13 order by id ";
                   
                   $result = pg_query($con,$query2);
@@ -677,13 +685,60 @@
                     //$loop = 1 + $loop;
                     // echo "<script>console.log('Debug Objects: " . $loop . "' );</script>";
                 ?>
-
                 <tr>
                 <td><?= $object ?></td>
                 <td><input type='number' name='action<?= $id ?>' value='<?= $action ?>' min="0" size="4"></td>
 
-                </tr>      
-                    
+                </tr>    
+
+                <?php
+                  }
+                
+                  $query2 = "Select * from controlpanel where id = 26 order by id ";
+                  
+                  $result = pg_query($con,$query2);
+                  while($row = pg_fetch_array($result) ){
+                      
+                    $id = $row['id'];
+                    $object = $row['object'];
+                    $action = $row['action'];
+                    //$actionName = 'action' . $row['id'];
+                    //$loop = 1 + $loop;
+                    // echo "<script>console.log('Debug Objects: " . $loop . "' );</script>";
+                ?>
+                <tr>
+                            
+                            <td><?= $object ?></td>
+                            <td>
+                                <select name= 'action<?= $id ?>'>
+                                    <option value="On"
+                                        <?php
+                                        if($action == 'On')
+                                            {
+                                                echo "selected";
+                                            }
+                                            
+                                        ?>
+                                        
+                                    >On</option>
+                                    
+                                    <option value="Off"
+                                    <?php
+                                        if($action == 'Off')
+                                            {
+                                                echo "selected";
+                                                
+                                            }
+                                        ?>
+                                    >Off</option>
+
+                                 </select>
+                               
+                                
+                            </td>
+                            
+                        </tr>   
+                   
                   <?php
                     }
                     
@@ -860,9 +915,53 @@
                         <th>Timer</th>
                         
                     </tr>
-                    
+                    <?php 
+                     $query = "Select * from controlpanel where id = 20 order by id ";
+                    $result = pg_query($con,$query);
+                   
+                    while($row = pg_fetch_array($result) ){
+                        
+                        $id = $row['id'];
+                        $object = $row['object'];
+                        $action = $row['action'];
+                         
+                    ?>
+                        <tr>
+                            
+                            
+                            <td><?= $object ?></td>
+                            <td>
+                                <select name= 'action<?= $id ?>'>
+                                    <option value="On"
+                                        <?php
+                                        if($action == 'On')
+                                            {
+                                                echo "selected";
+                                            }
+                                            
+                                        ?>
+                                        
+                                    >On</option>
+                                    
+                                    <option value="Off"
+                                    <?php
+                                        if($action == 'Off')
+                                            {
+                                                echo "selected";
+                                                
+                                            }
+                                        ?>
+                                    >Off</option>
+
+                                 </select> 
+                                
+                                
+                            </td>
+                            
+                        </tr>
+
                   <?php
-                    
+                }  
                      $query4 = "Select action from controlpanel where id = 18";
                     
                     $frequency = pg_query($con,$query4);
