@@ -2,6 +2,7 @@ import time
 import urllib.parse
 import psycopg2
 import threading
+from datetime import datetime, timedelta
 
 url = urllib.parse.urlparse(
     "postgres://nhchgncqtdohmw:44f34a07049a26867f87219d2591a73ba66b665048b3c11b6e9b8e10269c476a@ec2-54-147-93-73.compute-1.amazonaws.com:5432/d29h2tvqmjhdqj")
@@ -37,6 +38,8 @@ class Control:
         self.stop_wp2 = False
         self.stop_wp3 = False
         self.stop_led = False
+        self.ledstatus = False
+
 
     def runwp1(self):
         global duration
@@ -51,7 +54,6 @@ class Control:
         ##turn on the Water pump 1
         while status:
             print('Wp1 is high')
-
             if count == dur1:
                 print('Wp1 Done')
                 status = False
@@ -67,6 +69,7 @@ class Control:
         mycursor.execute(sql)
         mydb.commit()
         self.stop_wp1 = False
+        self.ledstatus = False
 
     def runwp2(self):
         global duration
@@ -129,27 +132,38 @@ class Control:
         self.stop_wp3 = False
 
     def runled(self):
-        global duration
+        global duration_led
         mycursor.execute("SELECT action FROM controlpanel where id = 17")
-        for x in mycursor.fetchall():
-            duration = x[0]
-        dur = int(duration) * 60
+        for y in mycursor.fetchall():
+            duration_led = y[0]
+
+        dur = int(duration_led) * 60
+
         print("dur: ", dur)
         count = 0
         status = True
-        ##turn on the LED
+        ##turn on the LED first
         #Check led mode
         mycursor.execute("SELECT action FROM controlpanel where id = 19")
         for y in mycursor.fetchall():
             mode = y[0]
         ledmode = int(mode)
-        if ledmode == 2:
+        if (ledmode == 2):
             ## 1 click for switching to mode 1
             # Update the db
             sql = "Update controlpanel SET action = 1 Where id = 19"
             mycursor.execute(sql)
             mydb.commit()
             print("change to mode 1")
+
+        # if (ledmode == 1 and self.ledstatus == True):
+        #     ## 2 clicks for switching to mode 2
+        #     # Update the db
+        #     sql = "Update controlpanel SET action = 2 Where id = 19"
+        #     mycursor.execute(sql)
+        #     mydb.commit()
+        #     print("change to mode 2")
+
         while status:
             print('LED is high')
 
@@ -168,10 +182,10 @@ class Control:
         mycursor.execute(sql)
         mydb.commit()
         self.stop_led = False
-
+        self.ledstatus = False
 
     def check(self):
-        global wp1, twp1, wp2, twp2, wp3, led
+        global wp1, twp1, wp2, twp2, wp3, led, settemp, currtemp, freq, freq_1, freq_2, freq_4
 
         mycursor.execute("SELECT action FROM controlpanel where id = 1")
         for x in mycursor.fetchall():
@@ -193,25 +207,35 @@ class Control:
             led = x[0]
             print("LED status: ", led)
 
-        # mycursor.execute("SELECT action FROM controlpanel where id = 5")
-        # for x in mycursor.fetchall():
-        #     twp1 = x[0]
-        #     print("Timer Water Pump 1 status: ", twp1)
-        #
-        # mycursor.execute("SELECT action FROM controlpanel where id = 6")
-        # for x in mycursor.fetchall():
-        #     twp2 = x[0]
-        #     print("Timer Water Pump 1 status: ", twp2)
-        #
-        # mycursor.execute("SELECT action FROM controlpanel where id = 26")
-        # for x in mycursor.fetchall():
-        #     twp3 = x[0]
-        #     print("Timer Water Pump 1 status: ", twp3)
-        #
-        # mycursor.execute("SELECT action FROM controlpanel where id = 20")
-        # for x in mycursor.fetchall():
-        #     tled = x[0]
-        #     print("Timer LED status: ", tled)
+        mycursor.execute("SELECT action FROM controlpanel where id = 5")
+        for x in mycursor.fetchall():
+            twp1 = x[0]
+            print("Timer Water Pump 1 status: ", twp1)
+
+        mycursor.execute("SELECT action FROM controlpanel where id = 6")
+        for x in mycursor.fetchall():
+            twp2 = x[0]
+            print("Timer Water Pump 1 status: ", twp2)
+
+        mycursor.execute("SELECT action FROM controlpanel where id = 26")
+        for x in mycursor.fetchall():
+            twp3 = x[0]
+            print("Timer Water Pump 1 status: ", twp3)
+
+        mycursor.execute("SELECT action FROM controlpanel where id = 20")
+        for x in mycursor.fetchall():
+            tled = x[0]
+            print("Timer LED status: ", tled)
+
+        mycursor.execute("SELECT temperature FROM datacollect Order by id desc limit 1")
+        for x in mycursor.fetchall():
+            currtemp = x[0]
+            print("Last Temperature: ", currtemp)
+
+        mycursor.execute("SELECT action FROM controlpanel where id = 16")
+        for x in mycursor.fetchall():
+            settemp = x[0]
+            print("Timer LED status: ", settemp)
 
         #Wp1 On/Off
         if wp1 == "On":
@@ -244,8 +268,9 @@ class Control:
             self.stop_wp3 = True
 
         # LED On/Off
-        if led == "On":
+        if (led == "On"):
             self.stop_led = False
+            self.ledstatus = False
             thled = threading.Thread(target=self.runled)
             thled.start()
             print("Open LED thread")
@@ -253,15 +278,184 @@ class Control:
             print("No LED thread running")
             self.stop_led = True
 
-        time.sleep(10)
+        # Timer of WP1
+        if (twp1 == "On"):
+            mycursor.execute("SELECT action FROM controlpanel where id = 4")
+            for x in mycursor.fetchall():
+                freq_1 = x[0]
 
-        # Temperature compare 
+            frequency = int(freq_1) + 6
+            l = []
+            print(frequency)
+            mycursor.execute("SELECT time FROM controlpanel where id >= 7 and id <= %s", (frequency,))
+            for x in mycursor.fetchall():
+                twp1 = x[0]
+                l.append(twp1)
+                print("Timer Water Pump 1 status: ", twp1)
 
-        # Timer of WP1 or WP2
-        
+            print(l)
+            now = datetime.now()
+            end = now + timedelta(minutes=1)
+            current_time = end.strftime("%H:%M:%S")
+            print(end)
+            print("Now Time: ", current_time)
+
+            def time_in_range(start, end, x):
+                print(start, end, x)
+                """Return true if x is in the range [start, end]"""
+                if start <= end:
+                    return start <= x <= end
+                else:
+                    return start <= x or x <= end
+
+            for x in l:
+                today = datetime.now().date()
+                y = datetime.combine(today, x)
+                result = time_in_range(now, end, y)
+                if result == True:
+                    mycursor.execute("SELECT action FROM controlpanel where id =1")
+                    for x in mycursor.fetchall():
+                        status = x[0]
+                    if status == "Off":
+                        sql = "Update controlpanel SET action = 'On' Where id =1"
+                        mycursor.execute(sql)
+                        mydb.commit()
+
+            print(result)
+
+        # Timer of WP2
+        if (twp2 == "On"):
+            mycursor.execute("SELECT action FROM controlpanel where id = 4")
+            for x in mycursor.fetchall():
+                freq_2 = x[0]
+
+            frequency = int(freq_2) + 6
+            l = []
+            print(frequency)
+            mycursor.execute("SELECT time FROM controlpanel where id >= 7 and id <= %s", (frequency,))
+            for x in mycursor.fetchall():
+                twp2 = x[0]
+                l.append(twp2)
+                print("Timer Water Pump 2 status: ", twp2)
+
+            print(l)
+            now = datetime.now()
+            end = now + timedelta(minutes=1)
+            current_time = end.strftime("%H:%M:%S")
+            print(end)
+            print("Now Time: ", current_time)
+
+            def time_in_range(start, end, x):
+                print(start, end, x)
+                """Return true if x is in the range [start, end]"""
+                if start <= end:
+                    return start <= x <= end
+                else:
+                    return start <= x or x <= end
+
+            for x in l:
+                today = datetime.now().date()
+                y = datetime.combine(today, x)
+                result = time_in_range(now, end, y)
+                if result == True:
+                    mycursor.execute("SELECT action FROM controlpanel where id =2")
+                    for x in mycursor.fetchall():
+                        status = x[0]
+                    if status == "Off":
+                        sql = "Update controlpanel SET action = 'On' Where id = 2"
+                        mycursor.execute(sql)
+                        mydb.commit()
+            print(result)
+
         # Timer of WP3
+        if (twp3 == "On"):
+
+            mycursor.execute("SELECT time FROM controlpanel where id = 14")
+            for x in mycursor.fetchall():
+                twp3 = x[0]
+                l.append(twp3)
+                print("Timer Water Pump 3 status: ", twp3)
+
+            print(l)
+            now = datetime.now()
+            end = now + timedelta(minutes=1)
+            current_time = end.strftime("%H:%M:%S")
+            print(end)
+            print("Now Time: ", current_time)
+
+            def time_in_range(start, end, x):
+                print(start, end, x)
+                """Return true if x is in the range [start, end]"""
+                if start <= end:
+                    return start <= x <= end
+                else:
+                    return start <= x or x <= end
+
+            for x in l:
+                today = datetime.now().date()
+                y = datetime.combine(today, x)
+                result = time_in_range(now, end, y)
+                if result == True:
+                    mycursor.execute("SELECT action FROM controlpanel where id = 12")
+                    for x in mycursor.fetchall():
+                        status = x[0]
+                    if status == "Off":
+                        sql = "Update controlpanel SET action = 'On' Where id = 12"
+                        mycursor.execute(sql)
+                        mydb.commit()
+
+            print(result)
 
         # Timer of LED
+        if (tled == "On"):
+            mycursor.execute("SELECT action FROM controlpanel where id = 18")
+            for x in mycursor.fetchall():
+                freq_4 = x[0]
+            frequency = int(freq_4) + 20
+            l = []
+            print(frequency)
+            mycursor.execute("SELECT time FROM controlpanel where id >= 21 and id <= %s", (frequency,))
+            for x in mycursor.fetchall():
+                tled = x[0]
+                l.append(tled)
+                print("Timer LED status: ", tled)
+
+            print(l)
+            now = datetime.now()
+            end = now + timedelta(minutes=1)
+            current_time = end.strftime("%H:%M:%S")
+            print(end)
+            print("Now Time: ", current_time)
+
+            def time_in_range(start, end, x):
+                print(start, end, x)
+                """Return true if x is in the range [start, end]"""
+                if start <= end:
+                    return start <= x <= end
+                else:
+                    return start <= x or x <= end
+
+            for x in l:
+                today = datetime.now().date()
+                y = datetime.combine(today, x)
+                result = time_in_range(now, end, y)
+                if result == True:
+                    sql = "Update controlpanel SET action = 'On' Where id = 15"
+                    mycursor.execute(sql)
+                    mydb.commit()
+            self.ledstatus = False
+            print(result)
+
+        # Compare temperature
+        # if (float(settemp) < float(currtemp)):
+        #     sql = "Update controlpanel SET action = 'On' Where id = 15"
+        #     mycursor.execute(sql)
+        #     mydb.commit()
+        #     self.stop_led = False
+        #     time.sleep(1)
+        #     self.ledstatus = True
+
+        time.sleep(10)
 
     def main(self):
         while True:
@@ -269,5 +463,22 @@ class Control:
 
 program = Control()
 program.main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
