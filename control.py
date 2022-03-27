@@ -14,23 +14,6 @@ mydb = psycopg2.connect(
 )
 mycursor = mydb.cursor()
 
-# mycursor.execute("SELECT time FROM controlpanel where id = 25 order by id")
-# myresult = mycursor.fetchall()
-# for x in myresult:
-#     print(x)
-
-#while True:
-# mycursor.execute("SELECT action FROM controlpanel where id = 1")
-# for x in mycursor.fetchall():
-#     wp1 = x[0]
-#     print(wp1)
-#
-#
-# mycursor.execute("SELECT action FROM controlpanel where id = 2")
-# for x in mycursor.fetchall():
-#     wp2 = x[0]
-#     print(wp2)
-
 class Control:
 # WP1 On/Off
     def __init__(self):
@@ -82,7 +65,9 @@ class Control:
         print("dur: ", dur2)
         count = 0
         status = True
+
         ##turn on the Water pump 2
+
         while status:
             print('Wp2 is high')
 
@@ -113,7 +98,9 @@ class Control:
         print("dur: ", dur3)
         count = 0
         status = True
+
         ##turn on the Water pump 3
+
         while status:
             print('wp3 is high')
 
@@ -144,7 +131,9 @@ class Control:
         print("dur: ", dur)
         count = 0
         status = True
+
         ##turn on the LED first
+
         #Check led mode
         mycursor.execute("SELECT action FROM controlpanel where id = 19")
         for y in mycursor.fetchall():
@@ -172,7 +161,6 @@ class Control:
         while status:
             print('LED is high')
             if(self.ledstatus == True):
-
                 mycursor.execute("SELECT temperature FROM datacollect ORDER BY ID DESC LIMIT 1")
                 for i in mycursor.fetchall():
                     temperature = i[0]
@@ -191,6 +179,7 @@ class Control:
             time.sleep(1)
 
         ##turn off the LED
+
         sql = "Update controlpanel SET action = 'Off' Where id = 15"
         mycursor.execute(sql)
         mydb.commit()
@@ -469,8 +458,6 @@ class Control:
                     mydb.commit()
             self.ledstatus = False
             print(result)
-
-
 
         time.sleep(10)
 

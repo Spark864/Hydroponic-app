@@ -495,7 +495,7 @@
                   ?>
 
                   <tr>
-                  <td><?= $object ?></td>
+                  <td><?= $object ?> </td>
                   <td><input type='number' name='action<?= $id ?>' min="1" max="5" value='<?= $action ?>' style="width: 4em"></td>
 
                   </tr>
@@ -519,7 +519,7 @@
 
             <!------------------------------------- Set Timer - Water Pump 1 & 2 ------------------------------------------>
             <form method='post' action=''>
-                <h3>Set Timer - Water Pump 1 & 2</h3>
+                <h3>Water Pump 1 & 2 - Set Timer</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
                         <!-- Check/Uncheck All-->
@@ -622,7 +622,7 @@
                         <!-- Check/Uncheck All-->
                         
                         <th>Object</th>
-                        <th>Timer</th>
+                        <th>Action</th>
                         
                     </tr>
                    
@@ -906,7 +906,7 @@
 
              <!------------------------------------- Set Timer - LED Light ------------------------------------------>
             <form method='post' action=''>
-                <h3>Set Timer - LED Light</h3>
+                <h3>LED Light - Set Timer</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
                         <!-- Check/Uncheck All-->
