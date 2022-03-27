@@ -40,7 +40,7 @@ class Control:
         self.stop_led = False
         self.ledstatus = False
 
-
+    # Run Wp1 Thread
     def runwp1(self):
         global duration
         mycursor.execute("SELECT action FROM controlpanel where id = 3")
@@ -71,6 +71,7 @@ class Control:
         self.stop_wp1 = False
         self.ledstatus = False
 
+    # Run Wp2 Thread
     def runwp2(self):
         global duration
         mycursor.execute("SELECT action FROM controlpanel where id = 3")
@@ -101,6 +102,7 @@ class Control:
         mydb.commit()
         self.stop_wp2 = False
 
+    # Run Wp3 Thread
     def runwp3(self):
         global duration
         mycursor.execute("SELECT action FROM controlpanel where id = 13")
@@ -131,12 +133,12 @@ class Control:
         mydb.commit()
         self.stop_wp3 = False
 
+    #Run LED Thread
     def runled(self):
-        global duration_led
+        global duration_led, temperature
         mycursor.execute("SELECT action FROM controlpanel where id = 17")
         for y in mycursor.fetchall():
             duration_led = y[0]
-
         dur = int(duration_led) * 60
 
         print("dur: ", dur)
@@ -156,26 +158,37 @@ class Control:
             mydb.commit()
             print("change to mode 1")
 
-        # if (ledmode == 1 and self.ledstatus == True):
-        #     ## 2 clicks for switching to mode 2
-        #     # Update the db
-        #     sql = "Update controlpanel SET action = 2 Where id = 19"
-        #     mycursor.execute(sql)
-        #     mydb.commit()
-        #     print("change to mode 2")
-
+        if (ledmode == 1 and self.ledstatus == True):
+            ## 2 clicks for switching to mode 2
+            # Update the db
+            sql = "Update controlpanel SET action = 2 Where id = 19"
+            mycursor.execute(sql)
+            mydb.commit()
+            print("change to mode 2")
+        mycursor.execute("SELECT action FROM controlpanel where id = 16")
+        for y in mycursor.fetchall():
+            temperature = y[0]
+        preset_temp = temperature
         while status:
             print('LED is high')
+            mycursor.execute("SELECT temperature FROM datacollect ORDER BY ID DESC LIMIT 1")
+            for y in mycursor.fetchall():
+                temperature = y[0]
 
-            if count == dur:
+            if float(preset_temp) > float(temperature) and self.ledstatus == True:
                 print('LED is low')
                 status = False
+
+            if count == dur and self.ledstatus == False:
+                print('LED is low')
+                status = False
+
             if self.stop_led:
-                print('LED thread killed')
+                print('LED is low')
                 status = False
             count += 1
             time.sleep(1)
-
+        print('LED thread killed')
         ##turn off the LED
 
         sql = "Update controlpanel SET action = 'Off' Where id = 15"
@@ -235,8 +248,16 @@ class Control:
         mycursor.execute("SELECT action FROM controlpanel where id = 16")
         for x in mycursor.fetchall():
             settemp = x[0]
-            print("Timer LED status: ", settemp)
+            print("Preset Temperature: ", settemp)
 
+        # Compare temperature
+        if (float(settemp) < float(currtemp) and self.ledstatus == False):
+            sql = "Update controlpanel SET action = 'On' Where id = 15"
+            mycursor.execute(sql)
+            mydb.commit()
+            self.stop_led = False
+            time.sleep(1)
+            self.ledstatus = True
         #Wp1 On/Off
         if wp1 == "On":
             self.stop_wp1 = False
@@ -446,14 +467,7 @@ class Control:
             self.ledstatus = False
             print(result)
 
-        # Compare temperature
-        # if (float(settemp) < float(currtemp)):
-        #     sql = "Update controlpanel SET action = 'On' Where id = 15"
-        #     mycursor.execute(sql)
-        #     mydb.commit()
-        #     self.stop_led = False
-        #     time.sleep(1)
-        #     self.ledstatus = True
+
 
         time.sleep(10)
 
@@ -463,6 +477,24 @@ class Control:
 
 program = Control()
 program.main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
