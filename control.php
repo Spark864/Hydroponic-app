@@ -496,7 +496,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='action<?= $id ?>' min="0" max="5" value='<?= $action ?>' style="width: 4em"></td>
+                  <td><input type='number' name='action<?= $id ?>' min="1" max="5" value='<?= $action ?>' style="width: 4em"></td>
 
                   </tr>
                   <?php
@@ -883,7 +883,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='action<?= $id ?>' min="0" max="5" value='<?= $action ?>' style="width: 4em"></td>
+                  <td><input type='number' name='action<?= $id ?>' min="1" max="5" value='<?= $action ?>' style="width: 4em"></td>
 
                   </tr>
                   <?php
