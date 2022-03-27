@@ -150,7 +150,7 @@ class Control:
         for y in mycursor.fetchall():
             mode = y[0]
         ledmode = int(mode)
-        if (ledmode == 2):
+        if (ledmode == 2 and self.ledstatus == False):
             ## 1 click for switching to mode 1
             # Update the db
             sql = "Update controlpanel SET action = 1 Where id = 19"
@@ -171,13 +171,14 @@ class Control:
         preset_temp = temperature
         while status:
             print('LED is high')
-            mycursor.execute("SELECT temperature FROM datacollect ORDER BY ID DESC LIMIT 1")
-            for y in mycursor.fetchall():
-                temperature = y[0]
+            if(self.ledstatus == True):
 
-            if float(preset_temp) > float(temperature) and self.ledstatus == True:
-                print('LED is low')
-                status = False
+                mycursor.execute("SELECT temperature FROM datacollect ORDER BY ID DESC LIMIT 1")
+                for i in mycursor.fetchall():
+                    temperature = i[0]
+                if float(preset_temp) > float(temperature):
+                    print('LED is low')
+                    status = False
 
             if count == dur and self.ledstatus == False:
                 print('LED is low')
@@ -188,14 +189,15 @@ class Control:
                 status = False
             count += 1
             time.sleep(1)
-        print('LED thread killed')
-        ##turn off the LED
 
+        ##turn off the LED
         sql = "Update controlpanel SET action = 'Off' Where id = 15"
         mycursor.execute(sql)
         mydb.commit()
         self.stop_led = False
         self.ledstatus = False
+        print('LED thread killed')
+
 
     def check(self):
         global wp1, twp1, wp2, twp2, wp3, led, settemp, currtemp, freq, freq_1, freq_2, freq_4
@@ -258,6 +260,7 @@ class Control:
             self.stop_led = False
             time.sleep(1)
             self.ledstatus = True
+
         #Wp1 On/Off
         if wp1 == "On":
             self.stop_wp1 = False
