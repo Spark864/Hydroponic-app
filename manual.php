@@ -157,7 +157,17 @@
                 
                 <!-- /.card-header -->
                 <div class="card-body" >
-                    
+                    <h3>Data Page</h3>
+                    <p>Functions about this page</p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                    <h3>Control Panel</h3>
+                    <p>Functions about this page</p>
+
                 </div>
                 <!-- /.card-body -->
                 </div>
