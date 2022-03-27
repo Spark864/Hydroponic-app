@@ -474,7 +474,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='action<?= $id ?>' value='<?= $action ?>' min="0" size="4" ></td>
+                  <td><input type='number' name='action<?= $id ?>' value='<?= $action ?>' min="0" style="width: 4em" ></td>
 
                   </tr>
 
@@ -496,7 +496,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='action<?= $id ?>' min="0" max="5" value='<?= $action ?>' size="4"></td>
+                  <td><input type='number' name='action<?= $id ?>' min="0" max="5" value='<?= $action ?>' style="width: 4em"></td>
 
                   </tr>
                   <?php
@@ -687,7 +687,7 @@
                 ?>
                 <tr>
                 <td><?= $object ?></td>
-                <td><input type='number' name='action<?= $id ?>' value='<?= $action ?>' min="0" size="4"></td>
+                <td><input type='number' name='action<?= $id ?>' value='<?= $action ?>' min="0" style="width: 4em"></td>
 
                 </tr>    
 
@@ -842,7 +842,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='action<?= $id ?>' step="any" min="0" value='<?= $action ?>' size="4"></td>
+                  <td><input type='number' name='action<?= $id ?>' step="any" min="0" value='<?= $action ?>' style="width: 4em"></td>
 
                   </tr>
 
@@ -863,7 +863,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='action<?= $id ?>' min="0" value='<?= $action ?>' size="4"></td>
+                  <td><input type='number' name='action<?= $id ?>' min="0" value='<?= $action ?>' style="width: 4em"></td>
 
                   </tr>
                   <?php
@@ -883,7 +883,7 @@
 
                   <tr>
                   <td><?= $object ?></td>
-                  <td><input type='number' name='action<?= $id ?>' min="0" max="5" value='<?= $action ?>' size="4"></td>
+                  <td><input type='number' name='action<?= $id ?>' min="0" max="5" value='<?= $action ?>' style="width: 4em"></td>
 
                   </tr>
                   <?php
