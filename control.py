@@ -28,8 +28,9 @@ class Control:
         self.thwp2 = threading.Thread(target=self.runwp2)
         self.thwp1 = threading.Thread(target=self.runwp1)
         self.durationwp = 0
-
-    # Run Wp1 Thread
+        self.currtemp = 0
+        self.mode = 0
+        # Run Wp1 Thread
     def runwp1(self):
 
         if self.durationwp == 0:
@@ -38,7 +39,6 @@ class Control:
             mydb.commit()
             durationwp = x[0]
             dur1 = int(durationwp) * 60
-
 
         print("dur: ", dur1)
         count = 0
@@ -147,10 +147,8 @@ class Control:
         ##turn on the LED first
 
         # Check led mode
-        mycursor.execute("SELECT action FROM controlpanel where id = 19")
-        y = mycursor.fetchone()
-        mode = y[0]
-        ledmode = int(mode)
+
+        ledmode = int(self.mode)
         if ledmode == 2 and not self.ledstatus:
             ## 1 click for switching to mode 1
             # Update the db
@@ -173,7 +171,7 @@ class Control:
         preset_temp = temperature
         while status:
             print('LED is high')
-            print(self.ledstatus)
+            # print(self.ledstatus)
             # problem from ledstatus
             if count == dur and not self.ledstatus:
                 print('LED is low')
@@ -185,14 +183,13 @@ class Control:
                 break
             count += 1
             if self.ledstatus:
-                mycursor.execute("SELECT temperature FROM datacollect ORDER BY ID DESC LIMIT 1")
-                i = mycursor.fetchone()
-                temperature = i[0]
-                if float(preset_temp) > float(temperature):
+                print("current temperature: ", self.currtemp)
+                if float(preset_temp) > float(self.currtemp):
                     print('Temperature is ok')
                     status = False
                     break
                 count -=1
+                time.sleep(10)
             time.sleep(1)
 
         ##turn off the LED
@@ -250,22 +247,17 @@ class Control:
 
         mycursor.execute("SELECT temperature FROM datacollect Order by id desc limit 1")
         x = mycursor.fetchone()
-        currtemp = x[0]
-        print("Last Temperature: ", currtemp)
+        self.currtemp = x[0]
+        print("Last Temperature: ", self.currtemp)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 16")
         x = mycursor.fetchone()
         settemp = x[0]
         print("Preset Temperature: ", settemp)
 
-        # Compare temperature
-        if float(settemp) < float(currtemp) and not self.ledstatus:
-            sql = "Update controlpanel SET action = 'On' Where id = 15"
-            mycursor.execute(sql)
-            mydb.commit()
-            self.stop_led = False
-            time.sleep(1)
-            self.ledstatus = True
+        mycursor.execute("SELECT action FROM controlpanel where id = 19")
+        x = mycursor.fetchone()
+        self.mode = x[0]
 
         # Wp1 On/Off
         if wp1 == "On" and not self.thwp1.is_alive():
@@ -297,10 +289,20 @@ class Control:
             print("No Wp3 thread running")
             self.stop_wp3 = True
 
-        # LED On/Off
-        if led == "On" and not self.thled.is_alive():
+        # Compare temperature
+        if float(settemp) < float(self.currtemp) and not self.ledstatus:
+            sql = "Update controlpanel SET action = 'On' Where id = 15"
+            mycursor.execute(sql)
+            mydb.commit()
             self.stop_led = False
-            self.ledstatus = False
+            self.thled.start()
+            self.ledstatus = True
+            time.sleep(1)
+
+        # LED On/Off
+        if led == "On" and not self.thled.is_alive() and not self.ledstatus:
+            self.stop_led = False
+            # self.ledstatus = False
             self.thled.start()
             print("Open LED thread")
             time.sleep(1)
