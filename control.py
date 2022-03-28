@@ -14,6 +14,14 @@ mydb = psycopg2.connect(
 )
 mycursor = mydb.cursor()
 
+
+def time_in_range(start, end, x):
+    print(start, end, x)
+    """Return true if x is in the range [start, end]"""
+    if start <= end:
+        return start <= x <= end
+    else:
+        return start <= x or x <= end
 class Control:
 # WP1 On/Off
     def __init__(self):
@@ -44,6 +52,7 @@ class Control:
                 print('Wp1 thread killed')
                 status = False
             count += 1
+            print(threading.active_count())
             time.sleep(1)
 
         ##turn off the Water pump 1
@@ -313,14 +322,6 @@ class Control:
             print(end)
             print("Now Time: ", current_time)
 
-            def time_in_range(start, end, x):
-                print(start, end, x)
-                """Return true if x is in the range [start, end]"""
-                if start <= end:
-                    return start <= x <= end
-                else:
-                    return start <= x or x <= end
-
             for x in l:
                 today = datetime.now().date()
                 y = datetime.combine(today, x)
@@ -358,14 +359,6 @@ class Control:
             print(end)
             print("Now Time: ", current_time)
 
-            def time_in_range(start, end, x):
-                print(start, end, x)
-                """Return true if x is in the range [start, end]"""
-                if start <= end:
-                    return start <= x <= end
-                else:
-                    return start <= x or x <= end
-
             for x in l:
                 today = datetime.now().date()
                 y = datetime.combine(today, x)
@@ -395,14 +388,6 @@ class Control:
             current_time = end.strftime("%H:%M:%S")
             print(end)
             print("Now Time: ", current_time)
-
-            def time_in_range(start, end, x):
-                print(start, end, x)
-                """Return true if x is in the range [start, end]"""
-                if start <= end:
-                    return start <= x <= end
-                else:
-                    return start <= x or x <= end
 
             for x in l:
                 today = datetime.now().date()
@@ -440,13 +425,6 @@ class Control:
             print(end)
             print("Now Time: ", current_time)
 
-            def time_in_range(start, end, x):
-                print(start, end, x)
-                """Return true if x is in the range [start, end]"""
-                if start <= end:
-                    return start <= x <= end
-                else:
-                    return start <= x or x <= end
 
             for x in l:
                 today = datetime.now().date()
@@ -464,6 +442,7 @@ class Control:
     def main(self):
         while True:
             self.check()
+            print(threading.active_count())
 
 program = Control()
 program.main()
