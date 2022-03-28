@@ -13,7 +13,7 @@ mydb = psycopg2.connect(
     database=url.path[1:]
 )
 mycursor = mydb.cursor()
-
+mycursor2 = mydb.cursor()
 
 class Control:
     # WP1 On/Off
@@ -28,17 +28,16 @@ class Control:
         self.thwp2 = threading.Thread(target=self.runwp2)
         self.thwp1 = threading.Thread(target=self.runwp1)
         self.durationwp = 0
+        self.durationwp3 = 0
+        self.durationled = 0
         self.currtemp = 0
+        self.settemp = 0
         self.mode = 0
         # Run Wp1 Thread
     def runwp1(self):
 
-        if self.durationwp == 0:
-            mycursor.execute("SELECT action FROM controlpanel where id = 3")
-            x = mycursor.fetchone()
-            mydb.commit()
-            durationwp = x[0]
-            dur1 = int(durationwp) * 60
+
+        dur1 = int(self.durationwp) * 60
 
         print("dur: ", dur1)
         count = 0
@@ -54,11 +53,13 @@ class Control:
                 status = False
             count += 1
             time.sleep(1)
+            print(threading.active_count())
+            print(threading.get_ident())
 
         ##turn off the Water pump 1
 
         sql = "Update controlpanel SET action = 'Off' Where id = 1"
-        mycursor.execute(sql)
+        mycursor2.execute(sql)
         mydb.commit()
         self.stop_wp1 = False
         self.ledstatus = False
@@ -66,12 +67,8 @@ class Control:
     # Run Wp2 Thread
     def runwp2(self):
 
-        if self.durationwp == 0:
-            mycursor.execute("SELECT action FROM controlpanel where id = 3")
-            x = mycursor.fetchone()
-            durationwp = x[0]
-            mydb.commit()
-            dur2 = int(durationwp) * 60
+
+        dur2 = int(self.durationwp) * 60
 
 
         print("dur: ", dur2)
@@ -95,17 +92,15 @@ class Control:
         ##turn off the Water pump 2
 
         sql = "Update controlpanel SET action = 'Off' Where id = 2"
-        mycursor.execute(sql)
+        mycursor2.execute(sql)
         mydb.commit()
         self.stop_wp2 = False
 
     # Run Wp3 Thread
     def runwp3(self):
-        global duration
-        mycursor.execute("SELECT action FROM controlpanel where id = 13")
-        x = mycursor.fetchone()
-        duration_ = x[0]
-        dur3 = int(duration) * 60
+
+
+        dur3 = int(self.durationwp3) * 60
 
         print("dur: ", dur3)
         count = 0
@@ -128,18 +123,14 @@ class Control:
         ##turn off the Water pump 3
 
         sql = "Update controlpanel SET action = 'Off' Where id = 12"
-        mycursor.execute(sql)
+        mycursor2.execute(sql)
         mydb.commit()
         self.stop_wp3 = False
 
     # Run LED Thread
     def runled(self):
-        global duration_led, temperature
-        mycursor.execute("SELECT action FROM controlpanel where id = 17")
-        y = mycursor.fetchone()
-        duration_led = y[0]
-        dur = int(duration_led) * 60
 
+        dur = int(self.durationled) * 60
         print("dur: ", dur)
         count = 0
         status = True
@@ -153,7 +144,7 @@ class Control:
             ## 1 click for switching to mode 1
             # Update the db
             sql = "Update controlpanel SET action = 1 Where id = 19"
-            mycursor.execute(sql)
+            mycursor2.execute(sql)
             mydb.commit()
             print("change to mode 1")
 
@@ -161,15 +152,14 @@ class Control:
             ## 2 clicks for switching to mode 2
             # Update the db
             sql = "Update controlpanel SET action = 2 Where id = 19"
-            mycursor.execute(sql)
+            mycursor2.execute(sql)
             mydb.commit()
             print("change to mode 2")
 
-        mycursor.execute("SELECT action FROM controlpanel where id = 16")
-        y = mycursor.fetchone()
-        temperature = y[0]
-        preset_temp = temperature
+
+        preset_temp = self.settemp
         while status:
+            print("while loop status", status)
             print('LED is high')
             # print(self.ledstatus)
             # problem from ledstatus
@@ -178,7 +168,7 @@ class Control:
                 status = False
                 break
             if self.stop_led:
-                print('LED is low')
+                print('LED is low2')
                 status = False
                 break
             count += 1
@@ -191,11 +181,13 @@ class Control:
                 count -=1
                 time.sleep(10)
             time.sleep(1)
+            print(threading.active_count())
+        print(threading.active_count())
 
         ##turn off the LED
-        print(status)
+        print("status2", status)
         sql = "Update controlpanel SET action = 'Off' Where id = 15"
-        mycursor.execute(sql)
+        mycursor2.execute(sql)
         mydb.commit()
         # self.thled.join()
         self.stop_led = False
@@ -204,97 +196,138 @@ class Control:
         time.sleep(1)
 
     def check(self):
-        global wp1, twp1, wp2, twp2, wp3, led, settemp, currtemp, freq, freq_1, freq_2, freq_4, twp3, tled
+
+
         mycursor.execute("SELECT action FROM controlpanel where id = 1")
         x = mycursor.fetchone()
+        print("wp1: " , x)
         wp1 = x[0]
         print("Water Pump 1 status: ", wp1)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 2")
         x = mycursor.fetchone()
+        print("wp2: " , x)
         wp2 = x[0]
         print("Water Pump 2 status: ", wp2)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 12")
         x = mycursor.fetchone()
+        print("wp3: " , x)
         wp3 = x[0]
         print("Water Pump 3 status: ", wp3)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 15")
         x = mycursor.fetchone()
+        print("ledStatus: " , x)
         led = x[0]
         print("LED status: ", led)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 5")
         x = mycursor.fetchone()
+        print("timer wp1: " , x)
         twp1 = x[0]
         print("Timer Water Pump 1 status: ", twp1)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 6")
         x = mycursor.fetchone()
+        print("timer wp2: " , x)
         twp2 = x[0]
         print("Timer Water Pump 1 status: ", twp2)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 26")
         x = mycursor.fetchone()
+        print("timer wp3: " , x)
         twp3 = x[0]
         print("Timer Water Pump 1 status: ", twp3)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 20")
         x = mycursor.fetchone()
+        print("timer LED status: " , x)
         tled = x[0]
         print("Timer LED status: ", tled)
 
         mycursor.execute("SELECT temperature FROM datacollect Order by id desc limit 1")
         x = mycursor.fetchone()
+        print("Last temperture", x)
         self.currtemp = x[0]
         print("Last Temperature: ", self.currtemp)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 16")
         x = mycursor.fetchone()
-        settemp = x[0]
-        print("Preset Temperature: ", settemp)
+        print("present tem", x)
+        self.settemp = x[0]
+        print("Preset Temperature: ", self.settemp)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 19")
         x = mycursor.fetchone()
+        print("led mode", x)
         self.mode = x[0]
+
+        mycursor.execute("SELECT action FROM controlpanel where id = 17")
+        x = mycursor.fetchone()
+        print("duration led", x)
+        self.durationled = x[0]
+
+        mycursor.execute("SELECT action FROM controlpanel where id = 3")
+        x = mycursor.fetchone()
+        print("duration wp12", x)
+        self.durationwp = x[0]
+
+        mycursor.execute("SELECT action FROM controlpanel where id = 13")
+        x = mycursor.fetchone()
+        print("duration wp3", x)
+        self.durationwp3 = x[0]
+
+        print(threading.active_count())
 
         # Wp1 On/Off
         if wp1 == "On" and not self.thwp1.is_alive():
+            print(threading.active_count())
+            print(self.thwp1.is_alive())
             self.stop_wp1 = False
+            self.thwp1 = threading.Thread(target=self.runwp1)
             self.thwp1.start()
             print("Open Wp1 thread")
-            time.sleep(1)
+            #time.sleep(1)
         if wp1 == "Off":
             print("No Wp1 thread running")
             self.stop_wp1 = True
 
+
+
         # Wp2 On/Off
         if wp2 == "On" and not self.thwp2.is_alive():
             self.stop_wp2 = False
+            self.thwp2 = threading.Thread(target=self.runwp2)
             self.thwp2.start()
             print("Open Wp2 thread")
-            time.sleep(1)
+            #time.sleep(1)
         if wp2 == "Off":
             print("No Wp2 thread running")
             self.stop_wp2 = True
+            time.sleep(1)
 
         # Wp3 On/Off
         if wp3 == "On" and not self.thwp3.is_alive():
             self.stop_wp3 = False
+            self.thwp3 = threading.Thread(target=self.runwp3)
             self.thwp3.start()
             print("Open Wp3 thread")
             time.sleep(1)
         if wp3 == "Off":
             print("No Wp3 thread running")
             self.stop_wp3 = True
+            time.sleep(1)
 
         # Compare temperature
-        if float(settemp) < float(self.currtemp) and not self.ledstatus:
-            sql = "Update controlpanel SET action = 'On' Where id = 15"
-            mycursor.execute(sql)
-            mydb.commit()
+        if float(self.settemp) < float(self.currtemp) and not self.ledstatus:
+            if led == "Off":
+                sql = "Update controlpanel SET action = 'On' Where id = 15"
+                mycursor.execute(sql)
+                mydb.commit()
             self.stop_led = False
+            time.sleep(1)
+            self.thled = threading.Thread(target=self.runled)
             self.thled.start()
             self.ledstatus = True
             time.sleep(1)
@@ -303,6 +336,7 @@ class Control:
         if led == "On" and not self.thled.is_alive() and not self.ledstatus:
             self.stop_led = False
             # self.ledstatus = False
+            self.thled = threading.Thread(target=self.runled)
             self.thled.start()
             print("Open LED thread")
             time.sleep(1)
@@ -310,7 +344,7 @@ class Control:
         # if self.thled.is_alive():
         #     print("Running led thread")
 
-        if led == "Off":
+        if led == "Off" and self.thled.is_alive():
             print("No LED thread running")
             self.stop_led = True
 
