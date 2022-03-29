@@ -44,7 +44,7 @@ function loadTable() {
         let tableData5 = document.createElement("td");
         tableData5.innerHTML = `<td ${css_class}> ${item.ppm}</td>`;
         let tableData6 = document.createElement("td");
-        tableData6.innerHTML = `<td ${css_class}> ${item.sunlight}</td>`;
+        tableData6.innerHTML = `<td ${css_class}> ${item.lum}</td>`;
         tableRow.appendChild(tableData);
         tableRow.appendChild(tableData2);
         tableRow.appendChild(tableData3);
