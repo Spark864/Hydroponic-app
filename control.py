@@ -64,8 +64,8 @@ class Control:
                 status = False
             count += 1
             time.sleep(1)
-            print(threading.active_count())
-            print(threading.get_ident())
+            # print(threading.active_count())
+            # print(threading.get_ident())
 
         ##turn off the Water pump 1
         #GPIO.output(36, GPIO.LOW)
@@ -206,8 +206,8 @@ class Control:
                 count -=1
                 time.sleep(10)
             time.sleep(1)
-            print(threading.active_count())
-        print(threading.active_count())
+            # print(threading.active_count())
+        # print(threading.active_count())
 
         ##turn off the LED
         # GPIO.output(29, GPIO.LOW)
@@ -231,89 +231,89 @@ class Control:
 
         mycursor.execute("SELECT action FROM controlpanel where id = 1")
         x = mycursor.fetchone()
-        print("wp1: " , x)
+        # print("wp1: " , x)
         wp1 = x[0]
         print("Water Pump 1 status: ", wp1)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 2")
         x = mycursor.fetchone()
-        print("wp2: " , x)
+        #print("wp2: " , x)
         wp2 = x[0]
         print("Water Pump 2 status: ", wp2)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 12")
         x = mycursor.fetchone()
-        print("wp3: " , x)
+        # print("wp3: " , x)
         wp3 = x[0]
         print("Water Pump 3 status: ", wp3)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 15")
         x = mycursor.fetchone()
-        print("ledStatus: " , x)
+        # print("ledStatus: " , x)
         led = x[0]
         print("LED status: ", led)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 5")
         x = mycursor.fetchone()
-        print("timer wp1: " , x)
+        # print("timer wp1: " , x)
         twp1 = x[0]
         print("Timer Water Pump 1 status: ", twp1)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 6")
         x = mycursor.fetchone()
-        print("timer wp2: " , x)
+        # print("timer wp2: " , x)
         twp2 = x[0]
         print("Timer Water Pump 1 status: ", twp2)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 26")
         x = mycursor.fetchone()
-        print("timer wp3: " , x)
+        # print("timer wp3: " , x)
         twp3 = x[0]
         print("Timer Water Pump 1 status: ", twp3)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 20")
         x = mycursor.fetchone()
-        print("timer LED status: " , x)
+        # print("timer LED status: " , x)
         tled = x[0]
         print("Timer LED status: ", tled)
 
         mycursor.execute("SELECT temperature FROM datacollect Order by id desc limit 1")
         x = mycursor.fetchone()
-        print("Last temperture", x)
+        # print("Last temperture", x)
         self.currtemp = x[0]
         print("Last Temperature: ", self.currtemp)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 16")
         x = mycursor.fetchone()
-        print("present tem", x)
+        # print("present tem", x)
         self.settemp = x[0]
         print("Preset Temperature: ", self.settemp)
 
         mycursor.execute("SELECT action FROM controlpanel where id = 19")
         x = mycursor.fetchone()
-        print("led mode", x)
+        # print("led mode", x)
         self.mode = x[0]
 
         mycursor.execute("SELECT action FROM controlpanel where id = 17")
         x = mycursor.fetchone()
-        print("duration led", x)
+        # print("duration led", x)
         self.durationled = x[0]
 
         mycursor.execute("SELECT action FROM controlpanel where id = 3")
         x = mycursor.fetchone()
-        print("duration wp12", x)
+        #  print("duration wp12", x)
         self.durationwp = x[0]
 
         mycursor.execute("SELECT action FROM controlpanel where id = 13")
         x = mycursor.fetchone()
-        print("duration wp3", x)
+        # print("duration wp3", x)
         self.durationwp3 = x[0]
 
-        print(threading.active_count())
+        # print(threading.active_count())
 
         # Wp1 On/Off
         if wp1 == "On" and not self.thwp1.is_alive():
-            print(threading.active_count())
+            # print(threading.active_count())
             print(self.thwp1.is_alive())
             self.stop_wp1 = False
             self.thwp1 = threading.Thread(target=self.runwp1)
@@ -387,22 +387,22 @@ class Control:
 
             frequency = int(freq_1) + 6
             l = []
-            print(frequency)
+            # print(frequency)
             mycursor.execute("SELECT time FROM controlpanel where id >= 7 and id <= %s", (frequency,))
             for x in mycursor.fetchall():
                 twp1 = x[0]
                 l.append(twp1)
                 print("Timer Water Pump 1 status: ", twp1)
 
-            print(l)
+            # print(l)
             now = datetime.now()
             end = now + timedelta(minutes=1)
             current_time = end.strftime("%H:%M:%S")
-            print(end)
-            print("Now Time: ", current_time)
+            # print(end)
+            # print("Now Time: ", current_time)
 
             def time_in_range(start, end, x):
-                print(start, end, x)
+                #   print(start, end, x)
                 """Return true if x is in the range [start, end]"""
                 if start <= end:
                     return start <= x <= end
@@ -432,19 +432,19 @@ class Control:
 
             frequency = int(freq_2) + 6
             l = []
-            print(frequency)
+            #print(frequency)
             mycursor.execute("SELECT time FROM controlpanel where id >= 7 and id <= %s", (frequency,))
             for x in mycursor.fetchall():
                 twp2 = x[0]
                 l.append(twp2)
-                print("Timer Water Pump 2 status: ", twp2)
+                #  print("Timer Water Pump 2 status: ", twp2)
 
-            print(l)
+            #print(l)
             now = datetime.now()
-            end = now + timedelta(minutes=1)
+            end = now + timedelta(seconds=10)
             current_time = end.strftime("%H:%M:%S")
-            print(end)
-            print("Now Time: ", current_time)
+            # print(end)
+            # print("Now Time: ", current_time)
 
             def time_in_range(start, end, x):
                 print(start, end, x)
@@ -475,17 +475,17 @@ class Control:
             for x in mycursor.fetchall():
                 twp3 = x[0]
                 l.append(twp3)
-                print("Timer Water Pump 3 status: ", twp3)
+                #       print("Timer Water Pump 3 status: ", twp3)
 
-            print(l)
+            #  print(l)
             now = datetime.now()
-            end = now + timedelta(minutes=1)
+            end = now + timedelta(seconds=30)
             current_time = end.strftime("%H:%M:%S")
-            print(end)
-            print("Now Time: ", current_time)
+            #  print(end)
+            #  print("Now Time: ", current_time)
 
             def time_in_range(start, end, x):
-                print(start, end, x)
+                #   print(start, end, x)
                 """Return true if x is in the range [start, end]"""
                 if start <= end:
                     return start <= x <= end
@@ -514,22 +514,22 @@ class Control:
             freq_4 = x[0]
             frequency = int(freq_4) + 20
             l = []
-            print(frequency)
+            #  print(frequency)
             mycursor.execute("SELECT time FROM controlpanel where id >= 21 and id <= %s", (frequency,))
             for x in mycursor.fetchall():
                 timerled = x[0]
                 l.append(timerled)
-                print("Timer LED status: ", timerled)
+                #     print("Timer LED status: ", timerled)
 
-            print(l)
+            # print(l)
             now = datetime.now()
-            end = now + timedelta(minutes=1)
+            end = now + timedelta(seconds=30)
             current_time = end.strftime("%H:%M:%S")
-            print(end)
-            print("Now Time: ", current_time)
+            # print(end)
+            # print("Now Time: ", current_time)
 
             def time_in_range(start, end, x):
-                print(start, end, x)
+                #    print(start, end, x)
                 """Return true if x is in the range [start, end]"""
                 if start <= end:
                     return start <= x <= end
