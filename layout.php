@@ -112,14 +112,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="aboutUs.php" class="nav-link">
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
-              <p>
-                About Us
-              </p>
-            </a>
-          </li>
+          
          
           
         </ul>
