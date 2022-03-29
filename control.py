@@ -148,7 +148,7 @@ class Control:
         status = True
 
         ##turn on the LED first
-        GPIO.output(29, GPIO.LOW)
+        
         GPIO.output(29, GPIO.HIGH)
         # Check led mode
 
@@ -210,7 +210,7 @@ class Control:
 
         ##turn off the LED
 
-        GPIO.output(29, GPIO.HIGH)
+        
         GPIO.output(29, GPIO.LOW)
 
         print("status2", status)
