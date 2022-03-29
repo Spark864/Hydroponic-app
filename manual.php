@@ -159,7 +159,9 @@
                 <div class="card-body" >
                     <h3>Data Page</h3>
                     <br>
-                    
+                    <b style="font-size: 18px">Description</b>
+                    <p style="font-size: 14px;padding:50px">&nbsp&nbsp&nbsp&nbsp The user can view 5 parameters from the hydroponic sensor readings. The 5 parameters update every second so the user can monitor the hydroponic in real time. The user can view an 24 hour period hourly graph of the hydroponic parameters that updates every 10 seconds. The user can hover over the data point to see the time and the data of the point. The user can choose a parameter from the 5 parameters. The table below the hourly graph shows all the 5 parameters and the date and time of the data when it is taken. The table is updated every 5 seconds and user can sort the data from descending or ascending and download a pdf of the table.</p>
+
                     <br>
                     <br>
                     <br>
