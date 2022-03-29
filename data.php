@@ -164,14 +164,8 @@
               <!-- small box -->
               <div class="small-box bg-info">
                   <div class="inner">
-                      <?php
-                      $query = "Select * from collectdata where id = 1";
-                                        $result = pg_query($con,$query);
-                          
-                                        $row = pg_fetch_array($result);
-                                        echo '<h3>'$row.humidity'<sup style="font-size: 20px">%</sup></h3>';
-                      ?>
-                      
+                      <h3>32<sup style="font-size: 20px">%</sup></h3>
+
                       <p>Humidity</p>
                   </div>
                   <div class="icon">
