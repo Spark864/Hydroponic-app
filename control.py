@@ -2,6 +2,8 @@ import time
 import urllib.parse
 import psycopg2
 import threading
+#import RPi.GPIO as GPIO
+
 from datetime import datetime, timedelta
 
 url = urllib.parse.urlparse(
@@ -14,6 +16,14 @@ mydb = psycopg2.connect(
 )
 mycursor = mydb.cursor()
 mycursor2 = mydb.cursor()
+
+# GPIO.setwarnings(False)
+# GPIO.setmode(GPIO.BOARD)
+# GPIO.setup(36, GPIO.OUT, initial=GPIO.LOW) #Wp1
+# GPIO.setup(40, GPIO.OUT, initial=GPIO.LOW) #Wp2
+# GPIO.setup(35, GPIO.OUT, initial=GPIO.LOW) #Wp3
+# GPIO.setup(29, GPIO.OUT, initial=GPIO.LOW) #LED
+# GPIO.setup(31, GPIO.OUT, initial=GPIO.LOW) #Mode
 
 class Control:
     # WP1 On/Off
@@ -43,6 +53,8 @@ class Control:
         count = 0
         status = True
         ##turn on the Water pump 1
+        #GPIO.output(36, GPIO.HIGH)
+
         while status:
             print('Wp1 is high')
             if count == dur1:
@@ -57,6 +69,7 @@ class Control:
             print(threading.get_ident())
 
         ##turn off the Water pump 1
+        #GPIO.output(36, GPIO.LOW)
 
         sql = "Update controlpanel SET action = 'Off' Where id = 1"
         mycursor2.execute(sql)
@@ -67,16 +80,13 @@ class Control:
     # Run Wp2 Thread
     def runwp2(self):
 
-
         dur2 = int(self.durationwp) * 60
-
-
         print("dur: ", dur2)
         count = 0
         status = True
 
         ##turn on the Water pump 2
-
+        # GPIO.output(40, GPIO.HIGH)
         while status:
             print('Wp2 is high')
 
@@ -90,6 +100,7 @@ class Control:
             time.sleep(1)
 
         ##turn off the Water pump 2
+        # GPIO.output(40, GPIO.LOW)
 
         sql = "Update controlpanel SET action = 'Off' Where id = 2"
         mycursor2.execute(sql)
@@ -107,6 +118,7 @@ class Control:
         status = True
 
         ##turn on the Water pump 3
+        # GPIO.output(35, GPIO.HIGH)
 
         while status:
             print('wp3 is high')
@@ -121,6 +133,7 @@ class Control:
             time.sleep(1)
 
         ##turn off the Water pump 3
+        # GPIO.output(35, GPIO.LOW)
 
         sql = "Update controlpanel SET action = 'Off' Where id = 12"
         mycursor2.execute(sql)
@@ -136,12 +149,16 @@ class Control:
         status = True
 
         ##turn on the LED first
-
+        # GPIO.output(29, GPIO.HIGH)
+        # GPIO.output(29, GPIO.LOW)
         # Check led mode
 
         ledmode = int(self.mode)
         if ledmode == 2 and not self.ledstatus:
             ## 1 click for switching to mode 1
+            # GPIO.output(31, GPIO.HIGH)
+            # GPIO.output(31, GPIO.LOW)
+
             # Update the db
             sql = "Update controlpanel SET action = 1 Where id = 19"
             mycursor2.execute(sql)
@@ -150,6 +167,12 @@ class Control:
 
         if ledmode == 1 and self.ledstatus:
             ## 2 clicks for switching to mode 2
+            # GPIO.output(31, GPIO.HIGH)
+            # GPIO.output(31, GPIO.LOW)
+            #time.sleep(1)
+            # GPIO.output(31, GPIO.HIGH)
+            # GPIO.output(31, GPIO.LOW)
+
             # Update the db
             sql = "Update controlpanel SET action = 2 Where id = 19"
             mycursor2.execute(sql)
@@ -185,6 +208,9 @@ class Control:
         print(threading.active_count())
 
         ##turn off the LED
+        # GPIO.output(29, GPIO.HIGH)
+        # GPIO.output(29, GPIO.LOW)
+
         print("status2", status)
         sql = "Update controlpanel SET action = 'Off' Where id = 15"
         mycursor2.execute(sql)
