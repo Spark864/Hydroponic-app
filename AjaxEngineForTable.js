@@ -40,11 +40,11 @@ function loadTable() {
         let tableData3 = document.createElement("td");
         tableData3.innerHTML = `<td ${css_class}> ${item.humidity}</td>`;
         let tableData4 = document.createElement("td");
-        tableData3.innerHTML = `<td ${css_class}> ${item.ph}</td>`;
+        tableData4.innerHTML = `<td ${css_class}> ${item.ph}</td>`;
         let tableData5 = document.createElement("td");
-        tableData3.innerHTML = `<td ${css_class}> ${item.ppm}</td>`;
+        tableData5.innerHTML = `<td ${css_class}> ${item.ppm}</td>`;
         let tableData6 = document.createElement("td");
-        tableData3.innerHTML = `<td ${css_class}> ${item.sunlight}</td>`;
+        tableData6.innerHTML = `<td ${css_class}> ${item.sunlight}</td>`;
         tableRow.appendChild(tableData);
         tableRow.appendChild(tableData2);
         tableRow.appendChild(tableData3);
