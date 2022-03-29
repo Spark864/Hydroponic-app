@@ -21,7 +21,7 @@ mycursor2 = mydb.cursor()
 # GPIO.setmode(GPIO.BOARD)
 # GPIO.setup(36, GPIO.OUT, initial=GPIO.LOW) #Wp1
 # GPIO.setup(40, GPIO.OUT, initial=GPIO.LOW) #Wp2
-# GPIO.setup(35, GPIO.OUT, initial=GPIO.LOW) #Wp3
+# GPIO.setup(32, GPIO.OUT, initial=GPIO.LOW) #Wp3
 # GPIO.setup(29, GPIO.OUT, initial=GPIO.LOW) #LED
 # GPIO.setup(31, GPIO.OUT, initial=GPIO.LOW) #Mode
 
@@ -46,10 +46,9 @@ class Control:
         # Run Wp1 Thread
     def runwp1(self):
 
-
         dur1 = int(self.durationwp) * 60
 
-        print("dur: ", dur1)
+        print("duration of Wp1: ", dur1)
         count = 0
         status = True
         ##turn on the Water pump 1
@@ -58,10 +57,10 @@ class Control:
         while status:
             print('Wp1 is high')
             if count == dur1:
-                print('Wp1 Done')
+                print('Wp1 Count Done')
                 status = False
             if self.stop_wp1:
-                print('Wp1 thread killed')
+                print('Wp1 thread killed by users')
                 status = False
             count += 1
             time.sleep(1)
@@ -118,7 +117,7 @@ class Control:
         status = True
 
         ##turn on the Water pump 3
-        # GPIO.output(35, GPIO.HIGH)
+        # GPIO.output(32, GPIO.HIGH)
 
         while status:
             print('wp3 is high')
@@ -133,7 +132,7 @@ class Control:
             time.sleep(1)
 
         ##turn off the Water pump 3
-        # GPIO.output(35, GPIO.LOW)
+        # GPIO.output(32, GPIO.LOW)
 
         sql = "Update controlpanel SET action = 'Off' Where id = 12"
         mycursor2.execute(sql)
@@ -149,9 +148,12 @@ class Control:
         status = True
 
         ##turn on the LED first
+        # GPIO.output(29, GPIO.LOW)
+        # GPIO.output(29, GPIO.HIGH)
+        # Check led mode
+        #time.sleep(1)
         # GPIO.output(29, GPIO.HIGH)
         # GPIO.output(29, GPIO.LOW)
-        # Check led mode
 
         ledmode = int(self.mode)
         if ledmode == 2 and not self.ledstatus:
@@ -208,6 +210,9 @@ class Control:
         print(threading.active_count())
 
         ##turn off the LED
+        # GPIO.output(29, GPIO.LOW)
+        # GPIO.output(29, GPIO.HIGH)
+        # time.sleep(1)
         # GPIO.output(29, GPIO.HIGH)
         # GPIO.output(29, GPIO.LOW)
 
