@@ -12,7 +12,7 @@ GPIO.setup(38, GPIO.OUT, initial=GPIO.LOW)  # Wp1 two
 GPIO.setup(37, GPIO.OUT, initial=GPIO.LOW)  # Wp2 one
 GPIO.setup(40, GPIO.OUT, initial=GPIO.LOW)  # Wp2 two
 
-GPIO.setup(32, GPIO.OUT, initial=GPIO.LOW)  # Wp3
+GPIO.setup(22, GPIO.OUT, initial=GPIO.LOW)  # Wp3
 
 GPIO.setup(29, GPIO.OUT, initial=GPIO.LOW)  # LED
 GPIO.setup(31, GPIO.OUT, initial=GPIO.LOW)  # Change Mode

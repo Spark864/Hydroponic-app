@@ -138,7 +138,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>About Us</h1>
+            
           </div>
           
         </div>
@@ -161,11 +161,7 @@
           
          
                 
-                <p style="font-size:18px;padding: 15px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspFive University students came together to create this hydroponic greenhouse. With the population growing and having limited resources, food and medicine is becoming scarcer. Plants are essential to provide oxygen to the world, recycles toxins in the air, and is a main food resource for animals.</p>
-         
-          
-                <p style="font-size:18px;padding: 15px;">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspThe main goal was to create an industrial hydroponic greenhouse system that allows users to control the growth factors allowing the plant to grow indoors. This project uses drip system technique to allow users to grow plants without the use of soil or sunlight, instead this project involves using water/nutrient solution to feed the plants and LED as a replacement for the sunlight.</p>
-          
+               
                 </div>
                 <!-- /.card-body -->
                 </div>
