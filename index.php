@@ -164,7 +164,7 @@
                     </table>
                     <br>
                     <div style="border:5px">
-                      <img src="image1.jpeg" width="100%" height="auto" alt="image">
+                      <img src="image1.jpeg" width="70%" height="auto" alt="image">
                     </div>
                     
                     <br><br>
