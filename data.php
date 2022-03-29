@@ -169,7 +169,7 @@
                                         $result = pg_query($con,$query);
                           
                                         $row = pg_fetch_array($result);
-                                        echo '<h3>'$row.humidity'<sup style="font-size: 20px">%</sup></h3>'
+                                        echo '<h3>'$row.humidity'<sup style="font-size: 20px">%</sup></h3>';
                       ?>
                       
                       <p>Humidity</p>
