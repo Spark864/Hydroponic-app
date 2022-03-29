@@ -289,6 +289,9 @@
                     <th>Time</th>
                     <th>Temperature</th>
                     <th>Humidity </th>
+                    <th>PH</th>
+                    <th>PPM</th>
+                    <th>Sunlight Intensity</th>
                    
                   </tr>
                   </thead>
