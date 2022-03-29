@@ -158,53 +158,54 @@
                 <!-- /.card-header -->
                 <div class="card-body" >
                     <h3>Data Page</h3>
-                    <br>
-                    <b style="font-size: 18px">Description</b>
-                    <p style="font-size: 18px;padding:50px">&nbsp&nbsp&nbsp&nbsp The user can view 5 parameters from the hydroponic sensor readings. The 5 parameters update every second so the user can monitor the hydroponic in real time. The user can view an 24 hour period hourly graph of the hydroponic parameters that updates every 10 seconds. The user can hover over the data point to see the time and the data of the point. The user can choose a parameter from the 5 parameters. The table below the hourly graph shows all the 5 parameters and the date and time of the data when it is taken. The table is updated every 5 seconds and user can sort the data from descending or ascending and download a pdf of the table.</p>
+                    
+                    <b style="font-size: 18px;margin-left:50px;margin-right:50px">Description</b>
+                    <p style="font-size: 18px;margin-left:50px;margin-right:50px">&nbsp&nbsp&nbsp&nbsp The user can view 5 parameters from the hydroponic sensor readings. The 5 parameters update every second so the user can monitor the hydroponic in real time. The user can view an 24 hour period hourly graph of the hydroponic parameters that updates every 10 seconds. The user can hover over the data point to see the time and the data of the point. The user can choose a parameter from the 5 parameters. The table below the hourly graph shows all the 5 parameters and the date and time of the data when it is taken. The table is updated every 5 seconds and user can sort the data from descending or ascending and download a pdf of the table.</p>
 
                     <br>
-                    <br>
-                    <br>
-                    <br>
+                    
 
                     <h3>Control Panel</h3>
-                    <b style="font-size: 18px;">Description</b>
-                    <p>&nbsp&nbsp&nbsp&nbsp Control Panel includes several functions that can be changed hardware and database settings. 
+                    <b style="font-size: 18px;margin-left:50px;margin-right:50px">Description</b>
+                    <p style="font-size: 18px;margin-left:50px;margin-right:50px">&nbsp&nbsp&nbsp&nbsp Control Panel includes several functions that can be changed hardware and database settings. 
                       Its main features are users can set the duration, frequency, and timers for each component (Water Pumps and LED Light). 
                       Also, users can control the components directly through the control panel.
                     </p>
+                    <div style="padding-left:50px; padding-right:50px;">
+                    <b style="font-size: 18px; ">Functions</b>
+                    
+                    <table style="font-size: 18px;" class="table table-bordered">
 
-                    <b style="font-size: 18px;">Functions</b>
-                    <table class="table table-bordered">
+                    <tr>
+                      <td>Water Pumps (1, 2, 3) & LED Light</td>
+                      <td>It allows users to turn on/off the hardware</td>
+                    </tr>
+                    <tr>
+                      <td>Set Timer</td>
+                      <td>This is an option allows users to use the timer for controlling the devices.</td>
+                    </tr>
 
-                          <tr>
-                            <td>Water Pumps (1, 2, 3) & LED Light</td>
-                            <td>It allows users to turn on/off the hardware</td>
-                          </tr>
-                          <tr>
-                            <td>Set Timer</td>
-                            <td>This is an option allows users to use the timer for controlling the devices.</td>
-                          </tr>
-                          
-                          <tr>
-                            <td>Duration (minutes)</td>
-                            <td>It allows users to set the time for how long the device is turned on
-                              . Once the time is up, the device will be turned off automatically.
-                            </td>
-                          </tr>
+                    <tr>
+                      <td>Duration (minutes)</td>
+                      <td>It allows users to set the time for how long the device is turned on
+                        . Once the time is up, the device will be turned off automatically.
+                      </td>
+                    </tr>
 
-                          <tr>
-                            <td>Frequency (per day)</td>
-                            <td>It allows users to set the number of timers they want.</td>
-                          </tr>
+                    <tr>
+                      <td>Frequency (per day)</td>
+                      <td>It allows users to set the number of timers they want.</td>
+                    </tr>
 
-                          <tr>
-                            <td>Timer</td>
-                            <td>It allows users to input the time for controlling the devices automatically.</td>
-                          </tr>
-                         
-                        </table>
+                    <tr>
+                      <td>Timer</td>
+                      <td>It allows users to input the time for controlling the devices automatically.</td>
+                    </tr>
 
+                    </table>
+
+                    </div>
+                   
                     
                 </div>
                 <!-- /.card-body -->
