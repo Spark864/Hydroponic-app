@@ -158,15 +158,51 @@
                 <!-- /.card-header -->
                 <div class="card-body" >
                     <h3>Data Page</h3>
-                    <p>Functions about this page</p>
                     <br>
+                    
                     <br>
                     <br>
                     <br>
                     <br>
 
                     <h3>Control Panel</h3>
-                    <p>Functions about this page</p>
+                    <b style="font-size: 18px;">Description</b>
+                    <p>&nbsp&nbsp&nbsp&nbsp Control Panel includes several functions that can be changed hardware and database settings. 
+                      Its main features are users can set the duration, frequency, and timers for each component (Water Pumps and LED Light). 
+                      Also, users can control the components directly through the control panel.
+                    </p>
+
+                    <b style="font-size: 18px;">Functions</b>
+                    <table class="table table-bordered">
+
+                          <tr>
+                            <td>Water Pumps (1, 2, 3) & LED Light</td>
+                            <td>It allows users to turn on/off the hardware</td>
+                          </tr>
+                          <tr>
+                            <td>Set Timer</td>
+                            <td>This is an option allows users to use the timer for controlling the devices.</td>
+                          </tr>
+                          
+                          <tr>
+                            <td>Duration (minutes)</td>
+                            <td>It allows users to set the time for how long the device is turned on
+                              . Once the time is up, the device will be turned off automatically.
+                            </td>
+                          </tr>
+
+                          <tr>
+                            <td>Frequency (per day)</td>
+                            <td>It allows users to set the number of timers they want.</td>
+                          </tr>
+
+                          <tr>
+                            <td>Timer</td>
+                            <td>It allows users to input the time for controlling the devices automatically.</td>
+                          </tr>
+                         
+                        </table>
+
                     
                 </div>
                 <!-- /.card-body -->
