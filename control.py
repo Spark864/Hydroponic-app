@@ -181,7 +181,7 @@ class Control:
         #     print("change to mode 2")
 
 
-        preset_temp = self.settemp
+     
         while status:
             print("while loop status", status)
             print('LED is high')
@@ -198,7 +198,7 @@ class Control:
             count += 1
             if self.ledstatus:
                 print("current temperature: ", self.currtemp)
-                if float(preset_temp) > float(self.currtemp):
+                if float(self.settemp) < float(self.currtemp):
                     print('Temperature is ok')
                     status = False
                     break
@@ -348,7 +348,7 @@ class Control:
             time.sleep(1)
 
         # Compare temperature
-        if float(self.settemp) < float(self.currtemp) and not self.ledstatus:
+        if float(self.settemp) > float(self.currtemp) and not self.ledstatus:
             if led == "Off":
                 sql = "Update controlpanel SET action = 'On' Where id = 15"
                 mycursor.execute(sql)
