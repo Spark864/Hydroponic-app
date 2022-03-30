@@ -6,20 +6,29 @@
 
     $alert= "";
     $alertLight= "";
-    
+    $value = "#00FF00";
 
-    $sql = "Select lum from datacollect Order by id desc limit 1";
+    $sql = "Select temperature from datacollect Order by id desc limit 1";
     
     $result = pg_query($con,$sql);
+
+    $sql = "Select action from controlpanel where id = 16";
+    
+    $result2 = pg_query($con,$sql);
     
     while($row = pg_fetch_array($result) ){
-        $lum = $row['lum'];
+        $currentTemp = $row['temperature'];
     }
 
-    if ($lum > 10){
-        $alertLight = '<div class="alert alert-warning" role="alert">
-        Warning! Lumen is higher than 2 
-      </div>';
+    while($row = pg_fetch_array($result2) ){
+      $presetTemp = $row['action'];
+  }
+
+    if ($presetTemp > $currentTemp){
+      $value = "#FE5957";
+    }
+    elseif ($presetTemp < $currentTemp){
+      $value = "#33ADFF";
     }
     // ------------------Water Pump 1 and 2--------------------------------
           if(isset($_POST['update_wp'])){
@@ -734,8 +743,8 @@
                   ?>
 
                   <tr>
-                  <td><?= $object ?></td>
-                  <td><input type='number' name='action<?= $id ?>' step="any" min="0" value='<?= $action ?>' style="width: 4em"></td>
+                  <td style="color:<?php echo $value; ?>"><?= $object ?></td>
+                  <td ><input type='number' name='action<?= $id ?>' step="any" min="0" value='<?= $action ?>' style="width: 4em"></td>
 
                   </tr>
 
