@@ -195,7 +195,7 @@
                       <td>It allows users to input the time for controlling the devices automatically.</td>
                     </tr>
                     <tr>
-                      <td>Temperature</td>
+                      <td>Preset Temperature</td>
                       <td>It allows users to set the preset the temperature. If the recevied temperature is lower than the preset temperature, the system will turn on the LED light until the recevied te,perature is higher than the preset temperature. </td>
                     </tr>
 
