@@ -132,7 +132,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Home</h1>
+            <h1>Welcome!</h1>
           </div>
           
         </div>
@@ -151,7 +151,7 @@
                 
                 <!-- /.card-header -->
                 <div class="card-body" >
-                    <table id="table1" class="table" >
+                    <!-- <table id="table1" class="table" >
                         <thead>
                             <tr>
                                 <td><a href="data.php">Data</a></td>
@@ -161,7 +161,7 @@
                             </tr>
                         </thead>
                     
-                    </table>
+                    </table> -->
                     <br>
                     <div style="border:5px">
                       <img src="image1.jpeg" width="70%" height="auto" alt="image">

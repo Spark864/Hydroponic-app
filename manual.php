@@ -160,7 +160,7 @@
 
                     <h3>Control Panel</h3>
                     <b style="font-size: 18px;margin-left:50px;margin-right:50px">Description</b>
-                    <p style="font-size: 18px;margin-left:50px;margin-right:50px">&nbsp&nbsp&nbsp&nbsp Control Panel includes several functions that can be changed hardware and database settings. 
+                    <p style="font-size: 18px;margin-left:50px;margin-right:50px">&nbsp&nbsp&nbsp&nbsp Control Panel includes several functions that can be changed the status of the devices and settings for controlling the devices. 
                       Its main features are users can set the duration, frequency, and timers for each component (Water Pumps and LED Light). 
                       Also, users can control the components directly through the control panel.
                     </p>
