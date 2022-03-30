@@ -24,8 +24,6 @@
     // ------------------Water Pump 1 and 2--------------------------------
           if(isset($_POST['update_wp'])){
            
-              
-
                 for ($x = 1; $x <= 4; $x++) {
                   $name = 'action' . $x;
                   $action = $_REQUEST[$name];
@@ -40,7 +38,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Successfully Updated</strong>
           </div>';
-            
+          header('Location: control.php');
           }
           
           // ------------------Water Pump 1 & 2 timer--------------------------------
@@ -85,6 +83,7 @@
             <strong>Successfully Updated</strong>
           </div>';
           }
+          header('Location: control.php');
         }
         //------------------Water Pump 3--------------------------------
           //Set start time 
@@ -118,7 +117,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Successfully Updated</strong>
           </div>';
-            
+          header('Location: control.php');
           }
 
         //------------------LED Light--------------------------------
@@ -138,7 +137,7 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Successfully Updated</strong>
           </div>';
-        
+          header('Location: control.php');
       }
 
       //------------------LED Light Timer--------------------------------
@@ -179,7 +178,10 @@
             <strong>Successfully Updated</strong>
           </div>';
       }
+      header('Location: control.php');
     }
+
+    
 
 
                 
@@ -211,7 +213,8 @@
               $(this).remove(); 
           });
       }, 4000);
-
+      
+      
         </script>
         <style>
       .switch {
