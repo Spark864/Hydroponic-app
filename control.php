@@ -1,10 +1,26 @@
 <?php 
     // Start MySQL Connection
     include('connect.php'); 
-    
+  
     include('checkLogin.php');
 
     $alert= "";
+    $alertLight= "";
+    
+
+    $sql = "Select lum from datacollect Order by id desc limit 1";
+    
+    $result = pg_query($con,$sql);
+    
+    while($row = pg_fetch_array($result) ){
+        $lum = $row['lum'];
+    }
+
+    if ($lum > 2){
+        $alertLight = '<div class="alert alert-warning" role="alert">
+        Warning! Lumen is higher than 2 
+      </div>';
+    }
     // ------------------Water Pump 1 and 2--------------------------------
           if(isset($_POST['update_wp'])){
            
@@ -20,7 +36,7 @@
                   pg_query($con,$updateData);
                 }
             
-            $alert = '<div class="alert alert-success" role="alert">
+            $alert = '<div id = "alert" class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Successfully Updated</strong>
           </div>';
@@ -64,7 +80,7 @@
             $sql = "UPDATE controlpanel SET time ='$time' WHERE id =" . $x;
             pg_query($con,$sql);
           
-            $alert = '<div class="alert alert-success" role="alert">
+            $alert = '<div id = "alert" class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Successfully Updated</strong>
           </div>';
@@ -98,7 +114,7 @@
             $sql = "UPDATE controlpanel SET time ='$time' WHERE id = 14";
             pg_query($con,$sql);
           
-            $alert = '<div class="alert alert-success" role="alert">
+            $alert = '<div id = "alert" class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Successfully Updated</strong>
           </div>';
@@ -118,7 +134,7 @@
               pg_query($con,$updateData);
             }
         
-            $alert = '<div class="alert alert-success" role="alert">
+            $alert = '<div id = "alert" class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Successfully Updated</strong>
           </div>';
@@ -158,7 +174,7 @@
         $sql = "UPDATE controlpanel SET time ='$time' WHERE id =" . $x;
         pg_query($con,$sql);
       
-        $alert = '<div class="alert alert-success" role="alert">
+        $alert = '<div id = "alert" class="alert alert-success" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <strong>Successfully Updated</strong>
           </div>';
@@ -191,7 +207,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
   <script>
           window.setTimeout(function() {
-          $(".alert").fadeTo(500, 0).slideUp(500, function(){
+          $("#alert").fadeTo(500, 0).slideUp(500, function(){
               $(this).remove(); 
           });
       }, 4000);
@@ -277,9 +293,6 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
      
-      
-     
-
         <button onclick="window.location ='logout.php'">
           <i class="fas fa-sign-out-alt"></i> Logout
           
@@ -367,9 +380,11 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+    <?php echo $alertLight; ?>
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
+            
             <h1>Control Panel</h1>
           </div>
           
@@ -393,7 +408,11 @@
 
 
                 <!------------------------------------- Water Pump 1 and 2 ------------------------------------------>
-                <form method='post' action=''><?php echo $alert; ?>
+                
+                <form method='post' action=''>
+                
+                  <?php echo $alert; ?>
+                  
                 <h3>Water Pump 1 & 2</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
