@@ -33,10 +33,28 @@
           vertical-align: middle;
         } */
         .center {
+          /* display: block;
+          margin-left: auto;
+          margin-right: auto; */
+          width: 60%;
+        }
+        .realcenter{
           display: block;
           margin-left: auto;
           margin-right: auto;
-          width: 70%;
+        }
+
+        .column {
+          float: left;
+          width: 30%;
+          padding: 5px;
+        }
+
+        /* Clearfix (clear floats) */
+        .row::after {
+          content: "";
+          clear: both;
+          display: table;
         }
 </style>
 
@@ -169,10 +187,20 @@
                     
                     </table>
                     <br>
-                    <div style="border:5px">
-                      <img src="image1.jpeg" class="center" alt="image">
-                    </div>
+                    <div>
+                      <img src="main.jpg" class="center" alt="image">
+                      </div>
                     
+                    <div class="row">
+                          <div class="column">
+                            <img src="sub1.jpg" alt="sub1" style="width:100%">
+                          </div>
+                          <div class="column">
+                            <img src="sub2.jpg" alt="sub2" style="width:100%">
+                          </div>
+                          
+                        </div>
+                        
                     <br><br>
                     <h5>About Us</h5>
                     
