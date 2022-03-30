@@ -400,66 +400,18 @@
 
 
                 <!------------------------------------- Water Pump 1 and 2 ------------------------------------------>
-                <form method='post' action=''><?php echo $alert; ?>
+                <form id=wpstat1 method='post' action=''><?php echo $alert; ?>
                 <h3>Water Pump 1 & 2</h3>
-                <table class="table table-bordered">
-                    <tr style='background: whitesmoke;'>
-                        <!-- Check/Uncheck All-->
-                        
-                        <th>Object</th>
-                        <th>Action</th>
-                        
-                    </tr>
-                    <?php 
-                     $query = "Select * from controlpanel where id < 3 order by id ";
-                    $result = pg_query($con,$query);
-                   
-                    while($row = pg_fetch_array($result) ){
-                        
-                        $id = $row['id'];
-                        $object = $row['object'];
-                        $action = $row['action'];
-                         
-                    ?>
-                        <tr>
-                            
-                            
-                            <td><?= $object ?></td>
-                            <td>
-                                <select name= 'action<?= $id ?>'>
-                                    <option value="On"
-                                        <?php
-                                        if($action == 'On')
-                                            {
-                                                echo "selected";
-                                            }
-                                            
-                                        ?>
-                                        
-                                    >On</option>
-                                    
-                                    <option value="Off"
-                                    <?php
-                                        if($action == 'Off')
-                                            {
-                                                echo "selected";
-                                                
-                                            }
-                                        ?>
-                                    >Off</option>
+                <table id=wpdata class="table table-bordered">
 
-                                 </select>
-                                 
-                                
-                            </td>
-                            
-                        </tr>
+
+
 
                         
                     <?php
                     
                     
-                    }
+                    
 
                     $query2 = "Select * from controlpanel where id = 3 order by id ";
                     
@@ -615,7 +567,7 @@
             </form>
 
             <!------------------------------------- Water Pump 3 ------------------------------------------>
-            <form method='post' action=''>
+            <form id=wpstat3 method='post' action=''>
                 <h3>Water Pump 3</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
@@ -626,53 +578,13 @@
                         
                     </tr>
                    
-                  <?php 
-                     $query3 = "Select * from controlpanel where id = 12 order by id ";
-                    $result = pg_query($con,$query3);
-                   
-                    while($row = pg_fetch_array($result) ){
-                        
-                        $id = $row['id'];
-                        $object = $row['object'];
-                        $action = $row['action'];
-                         
-                    ?>
-                        <tr>
+                        <tr id="wp3data">
                             
-                            
-                            <td><?= $object ?></td>
-                            <td>
-                                <select name= 'action<?= $id ?>'>
-                                    <option value="On"
-                                        <?php
-                                        if($action == 'On')
-                                            {
-                                                echo "selected";
-                                            }
-                                            
-                                        ?>
-                                        
-                                    >On</option>
-                                    
-                                    <option value="Off"
-                                    <?php
-                                        if($action == 'Off')
-                                            {
-                                                echo "selected";
-                                                
-                                            }
-                                        ?>
-                                    >Off</option>
-
-                                 </select>
-                               
-                                
-                            </td>
                             
                         </tr>
 
                   <?php
-                  }
+                  
                   $query2 = "Select * from controlpanel where id = 13 order by id ";
                   
                   $result = pg_query($con,$query2);
@@ -1050,6 +962,6 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- Page specific script -->
-
+<script src="ajaxEngineControl.js" async></script>
 </body>
 </html>
