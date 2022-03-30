@@ -3,6 +3,22 @@
     include('connect.php'); 
     
     include('checkLogin.php');
+    $alertLight= "";
+    
+
+    $sql = "Select lum from datacollect Order by id desc limit 1";
+    
+    $result = pg_query($con,$sql);
+    
+    while($row = pg_fetch_array($result) ){
+        $lum = $row['lum'];
+    }
+
+    if ($lum > 2){
+        $alertLight = '<div class="alert alert-warning" role="alert">
+        Warning! Lumen is higher than 2 
+      </div>';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -140,6 +156,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+    <?php echo $alertLight; ?>
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
