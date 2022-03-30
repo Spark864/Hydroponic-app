@@ -68,7 +68,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index.html" class="brand-link">
+    <a href="index.php" class="brand-link">
      
       <span class="brand-text font-weight-light">Hydroponic System</span>
     </a>

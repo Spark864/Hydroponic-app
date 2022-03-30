@@ -432,7 +432,6 @@ class Control:
 
         # Timer of WP3
         if twp3 == "On":
-
             mycursor.execute("SELECT time FROM controlpanel where id = 14")
             for x in mycursor.fetchall():
                 twp3 = x[0]
