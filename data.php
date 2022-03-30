@@ -14,7 +14,7 @@
         $lum = $row['lum'];
     }
 
-    if ($lum > 2){
+    if ($lum > 10){
         $alertLight = '<div class="alert alert-warning" role="alert">
         Warning! Lumen is higher than 2 
       </div>';

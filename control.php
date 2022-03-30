@@ -16,7 +16,7 @@
         $lum = $row['lum'];
     }
 
-    if ($lum > 2){
+    if ($lum > 10){
         $alertLight = '<div class="alert alert-warning" role="alert">
         Warning! Lumen is higher than 2 
       </div>';
@@ -413,7 +413,7 @@
                 
                   <?php echo $alert; ?>
                   
-                <h3>Water Pump 1 & 2</h3>
+                <h3>Water Pump 1 & 2 (For Plants)</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
                         <!-- Check/Uncheck All-->
@@ -628,7 +628,7 @@
 
             <!------------------------------------- Water Pump 3 ------------------------------------------>
             <form method='post' action=''>
-                <h3>Water Pump 3</h3>
+                <h3>Water Pump 3 (For Filtering)</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
                         <!-- Check/Uncheck All-->

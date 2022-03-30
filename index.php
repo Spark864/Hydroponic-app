@@ -29,8 +29,14 @@
         td {
         text-align: center;
         }
-        img {
+        /* img {
           vertical-align: middle;
+        } */
+        .center {
+          display: block;
+          margin-left: auto;
+          margin-right: auto;
+          width: 70%;
         }
 </style>
 
@@ -151,7 +157,7 @@
                 
                 <!-- /.card-header -->
                 <div class="card-body" >
-                    <!-- <table id="table1" class="table" >
+                    <table id="table1" class="table" >
                         <thead>
                             <tr>
                                 <td><a href="data.php">Data</a></td>
@@ -161,10 +167,10 @@
                             </tr>
                         </thead>
                     
-                    </table> -->
+                    </table>
                     <br>
                     <div style="border:5px">
-                      <img src="image1.jpeg" width="70%" height="auto" alt="image">
+                      <img src="image1.jpeg" class="center" alt="image">
                     </div>
                     
                     <br><br>
