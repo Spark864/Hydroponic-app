@@ -413,9 +413,16 @@
                 <!------------------------------------- Water Pump 1 and 2 ------------------------------------------>
                 <form id=wpstat1 method='post' action=''><?php echo $alert; ?>
                 <h3>Water Pump 1 & 2</h3>
-                <table id=wpdata class="table table-bordered">
-
-
+                <table class="table table-bordered">
+                  <tr style="background: whitesmoke;">
+                  <th>Object</th>
+                  <th>Action</th> 
+                </tr>
+                <tr id=wpdata>
+                </tr>
+                <tr id=wpdata2>
+                </tr>
+                
 
 
                         
