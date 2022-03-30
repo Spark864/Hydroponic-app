@@ -147,43 +147,10 @@ class Control:
         count = 0
         status = True
 
-        ##turn on the LED first
-        
+        ##turn on the LED
         GPIO.output(29, GPIO.HIGH)
-        # Check led mode
-
-
-
-        # ledmode = int(self.mode)
-        # if ledmode == 2 and not self.ledstatus:
-        #     ## 1 click for switching to mode 1
-        #     # GPIO.output(31, GPIO.HIGH)
-        #     # GPIO.output(31, GPIO.LOW)
-        #
-        #     # Update the db
-        #     sql = "Update controlpanel SET action = 1 Where id = 19"
-        #     mycursor2.execute(sql)
-        #     mydb.commit()
-        #     print("change to mode 1")
-        #
-        # if ledmode == 1 and self.ledstatus:
-        #     ## 2 clicks for switching to mode 2
-        #     # GPIO.output(31, GPIO.HIGH)
-        #     # GPIO.output(31, GPIO.LOW)
-        #     #time.sleep(1)
-        #     # GPIO.output(31, GPIO.HIGH)
-        #     # GPIO.output(31, GPIO.LOW)
-        #
-        #     # Update the db
-        #     sql = "Update controlpanel SET action = 2 Where id = 19"
-        #     mycursor2.execute(sql)
-        #     mydb.commit()
-        #     print("change to mode 2")
-
-
      
         while status:
-            print("while loop status", status)
             print('LED is high')
             # print(self.ledstatus)
             # problem from ledstatus
@@ -209,8 +176,6 @@ class Control:
         # print(threading.active_count())
 
         ##turn off the LED
-
-        
         GPIO.output(29, GPIO.LOW)
 
         print("status2", status)
