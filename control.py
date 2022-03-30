@@ -403,7 +403,7 @@ class Control:
 
             #print(l)
             now = datetime.now()
-            end = now + timedelta(seconds=10)
+            end = now + timedelta(minutes=1)
             current_time = end.strftime("%H:%M:%S")
             # print(end)
             # print("Now Time: ", current_time)
@@ -440,7 +440,7 @@ class Control:
 
             #  print(l)
             now = datetime.now()
-            end = now + timedelta(seconds=30)
+            end = now + timedelta(minutes=1)
             current_time = end.strftime("%H:%M:%S")
             #  print(end)
             #  print("Now Time: ", current_time)
@@ -484,7 +484,7 @@ class Control:
 
             # print(l)
             now = datetime.now()
-            end = now + timedelta(seconds=30)
+            end = now + timedelta(minutes=1)
             current_time = end.strftime("%H:%M:%S")
             # print(end)
             # print("Now Time: ", current_time)
