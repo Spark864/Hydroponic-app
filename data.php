@@ -3,6 +3,22 @@
     include('connect.php'); 
     
     include('checkLogin.php');
+    $alertLight= "";
+    
+
+    $sql = "Select lum from datacollect Order by id desc limit 1";
+    
+    $result = pg_query($con,$sql);
+    
+    while($row = pg_fetch_array($result) ){
+        $lum = $row['lum'];
+    }
+
+    if ($lum > 10){
+        $alertLight = '<div class="alert alert-warning" role="alert">
+        Warning! Lumen is higher than 2 
+      </div>';
+    }
 ?>
 
 <!DOCTYPE html>
@@ -126,14 +142,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="aboutUs.php" class="nav-link">
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
-              <p>
-                About Us
-              </p>
-            </a>
-          </li>
+          
          
           
         </ul>
@@ -147,6 +156,7 @@
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
+    <?php echo $alertLight; ?>
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -171,7 +181,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                   <div class="inner">
-                      <h3>35<sup style="font-size: 20px">%</sup></h3>
+                      <h3>32<sup style="font-size: 20px">%</sup></h3>
 
                       <p>Humidity</p>
                   </div>
@@ -296,6 +306,9 @@
                     <th>Time</th>
                     <th>Temperature</th>
                     <th>Humidity </th>
+                    <th>PH</th>
+                    <th>PPM</th>
+                    <th>Sunlight Intensity</th>
                    
                   </tr>
                   </thead>

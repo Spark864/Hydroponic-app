@@ -39,9 +39,18 @@ function loadTable() {
         tableData2.innerHTML = `<td ${css_class}> ${item.temperature}</td>`;
         let tableData3 = document.createElement("td");
         tableData3.innerHTML = `<td ${css_class}> ${item.humidity}</td>`;
+        let tableData4 = document.createElement("td");
+        tableData4.innerHTML = `<td ${css_class}> ${item.ph}</td>`;
+        let tableData5 = document.createElement("td");
+        tableData5.innerHTML = `<td ${css_class}> ${item.ppm}</td>`;
+        let tableData6 = document.createElement("td");
+        tableData6.innerHTML = `<td ${css_class}> ${item.lum}</td>`;
         tableRow.appendChild(tableData);
         tableRow.appendChild(tableData2);
         tableRow.appendChild(tableData3);
+        tableRow.appendChild(tableData4);
+        tableRow.appendChild(tableData5);
+        tableRow.appendChild(tableData6);
         tableBody.appendChild(tableRow);
       });
       table = $("#example1")

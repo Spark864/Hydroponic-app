@@ -83,7 +83,7 @@ include('connect.php');
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in</p>
+                <p class="login-box-msg">Login</p>
                 <?php 
                 if(!empty($login_err)){
                     echo '<div class="alert alert-danger">' . $login_err . '</div>';

@@ -53,7 +53,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="index.php" class="brand-link">
      
       <span class="brand-text font-weight-light">Hydroponic System</span>
     </a>
@@ -112,14 +112,7 @@
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="aboutUs.php" class="nav-link">
-            <i class="fa fa-info-circle" aria-hidden="true"></i>
-              <p>
-                About Us
-              </p>
-            </a>
-          </li>
+          
          
           
         </ul>
