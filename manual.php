@@ -196,7 +196,7 @@
                     </tr>
                     <tr>
                       <td>Preset Temperature</td>
-                      <td>It allows users to set the preset temperature. If the recevied temperature is lower than the preset temperature, the system will turn on the LED light until the recevied te,perature is higher than the preset temperature. </td>
+                      <td>It allows users to set the preset temperature. If the recevied temperature is lower than the preset temperature, the system will turn on the LED light until the recevied temperature is higher than the preset temperature. </td>
                     </tr>
 
                     </table>
