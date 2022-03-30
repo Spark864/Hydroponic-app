@@ -706,48 +706,11 @@
                         <th>Action</th>
                         
                     </tr>
-                    <?php 
-                     $query = "Select * from controlpanel where id = 15 order by id ";
-                    $result = pg_query($con,$query);
-                   
-                    while($row = pg_fetch_array($result) ){
-                        
-                        $id = $row['id'];
-                        $object = $row['object'];
-                        $action = $row['action'];
-                         
-                    ?>
-                        <tr>
-                            
-                            
-                            <td><?= $object ?></td>
-                            <td>
-                                <select name= 'action<?= $id ?>'>
-                                    <option value="On"
-                                        <?php
-                                        if($action == 'On')
-                                            {
-                                                echo "selected";
-                                            }
-                                            
-                                        ?>
-                                        
-                                    >On</option>
-                                    
-                                    <option value="Off"
-                                    <?php
-                                        if($action == 'Off')
-                                            {
-                                                echo "selected";
-                                                
-                                            }
-                                        ?>
-                                    >Off</option>
 
-                                 </select> 
-                                
-                                
-                            </td>
+                        <tr id=led>
+                            
+                            
+
                             
                         </tr>
 
@@ -755,7 +718,7 @@
                     <?php
                     
                     
-                    }
+                    
 
                     $query2 = "Select * from controlpanel where id = 16 order by id ";
                     
