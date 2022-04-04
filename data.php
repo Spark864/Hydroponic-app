@@ -253,43 +253,44 @@
           </div>
           <!-- ./col -->
         </div>
+        
       <div class="row">
-                        <div class="col-12">
-                            <!-- interactive chart -->
-                            <div class="card card-primary card-outline">
-                                <div class="card-header">
-                                    <h3 class="card-title">
-                                        <i class="far fa-chart-bar"></i> Interactive Area Chart
-                                    </h3>
+          <div class="col-12">
+              <!-- interactive chart -->
+              <div class="card card-primary card-outline">
+                  <div class="card-header">
+                      <h3 class="card-title">
+                          <i class="far fa-chart-bar"></i> Interactive Area Chart
+                      </h3>
 
-                                    <div class="card-tools">
-                                        Parameters
-                                        <div class="btn-group" id="realtime" data-toggle="btn-toggle">
-                                            <button type="button" class="btn btn-default btn-sm active" data-toggle="humidity">Humidity</button>
-                                            <button type="button" class="btn btn-default btn-sm" data-toggle="temperature">Temperature</button>
-                                            <button type="button" class="btn btn-default btn-sm" data-toggle="ph">PH</button>
-                                            <button type="button" class="btn btn-default btn-sm" data-toggle="ppm">PPM</button>
-                                            <button type="button" class="btn btn-default btn-sm" data-toggle="sunlight">Sunlight</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div id="interactive" style="height: 300px;">
-                                    <canvas id="myChart"></canvas>
-                                    <canvas id="myChart2" style="display:none;"></canvas>
-                                    <canvas id="myChart3" style="display:none;"></canvas>
-                                    <canvas id="myChart4" style="display:none;"></canvas>
-                                    <canvas id="myChart5" style="display:none;"></canvas>
-                                  </div>
-                                </div>
-                                <!-- /.card-body-->
-                            </div>
-                            <!-- /.card -->
-
-                        </div>
-                        <!-- /.col -->
+                      <div class="card-tools">
+                          Parameters
+                          <div class="btn-group" id="realtime" data-toggle="btn-toggle">
+                              <button type="button" class="btn btn-default btn-sm active" data-toggle="humidity">Humidity</button>
+                              <button type="button" class="btn btn-default btn-sm" data-toggle="temperature">Temperature</button>
+                              <button type="button" class="btn btn-default btn-sm" data-toggle="ph">PH</button>
+                              <button type="button" class="btn btn-default btn-sm" data-toggle="ppm">PPM</button>
+                              <button type="button" class="btn btn-default btn-sm" data-toggle="sunlight">Sunlight</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="card-body">
+                      <div id="interactive" style="height: 300px;">
+                      <canvas id="myChart"></canvas>
+                      <canvas id="myChart2" style="display:none;"></canvas>
+                      <canvas id="myChart3" style="display:none;"></canvas>
+                      <canvas id="myChart4" style="display:none;"></canvas>
+                      <canvas id="myChart5" style="display:none;"></canvas>
                     </div>
-                    <!-- /.row -->
+                  </div>
+                  <!-- /.card-body-->
+              </div>
+              <!-- /.card -->
+
+          </div>
+          <!-- /.col -->
+      </div>
+    <!-- /.row -->
         <div class="row">
           <div class="col-12">
             
