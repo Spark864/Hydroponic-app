@@ -118,7 +118,7 @@ function loadControl() {
       },
     });
   });
-  setTimeout(loadControl, 5000);
+  setTimeout(loadControl, 20000);
 }
 
 loadControl();
