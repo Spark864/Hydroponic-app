@@ -49,28 +49,55 @@ include('connect.php');
             }
             // Validate credentials
             if(empty($username_err) && empty($password_err)){
+                
                 //check if username and password exist
-                $result = pg_query($con, "Select * from public.user where username = '$username' and password = '$password'");
-                if(pg_num_rows($result)==1){
-                    // Store data in session variables
-                    session_start();
-                    $_SESSION["loggedin"]=true;
-                    $_SESSION["id"]=$row["id"];
-                    $_SESSION["username"]=$row["username"];
-                    if(isset($_POST["remember"])) {
-                        setcookie ("login_username",$_POST["username"],time()+ (60 * 60));
-                    } else {
-                        if(isset($_COOKIE["login_username"])) {
-                            setcookie ("login_username","");
+                $query = "Select * from public.user";
+                $resultdb = pg_query($con,$query);
+                while($row = pg_fetch_array($resultdb) ){
+                    $id = $row['id'];
+                    $user = $row['username'];
+                    $pass = $row['password'];
+
+                    if($user == $username && $pass == $password){
+                        session_start();
+                        $_SESSION["loggedin"]=true;
+                        $_SESSION["id"]=$row["id"];
+                        $_SESSION["username"]=$row["username"];
+                        if(isset($_POST["remember"])) {
+                            setcookie ("login_username",$_POST["username"],time()+ (60 * 60));
+                        } else {
+                            if(isset($_COOKIE["login_username"])) {
+                                setcookie ("login_username","");
+                            }
                         }
+                        // Redirect user to index page
+                        header("location: index.php");
                     }
-                    // Redirect user to index page
-                    header("location: index.php");
                 }
-                else{
-                    // Username doesn't exist, display a generic error message
-                    $login_err = "Invalid username or password.";
-                }
+
+                $login_err = "Invalid username or password.";
+
+                // $result = pg_query($con, "Select * from public.user where username = '$username' and password = '$password'");
+                // if(pg_num_rows($result)==1){
+                //     // Store data in session variables
+                //     session_start();
+                //     $_SESSION["loggedin"]=true;
+                //     $_SESSION["id"]=$row["id"];
+                //     $_SESSION["username"]=$row["username"];
+                //     if(isset($_POST["remember"])) {
+                //         setcookie ("login_username",$_POST["username"],time()+ (60 * 60));
+                //     } else {
+                //         if(isset($_COOKIE["login_username"])) {
+                //             setcookie ("login_username","");
+                //         }
+                //     }
+                //     // Redirect user to index page
+                //     header("location: index.php");
+                // }
+                // else{
+                //     // Username doesn't exist, display a generic error message
+                   
+                // }
             }
         }
     
