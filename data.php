@@ -181,7 +181,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                   <div class="inner">
-                      <h3>32<sup style="font-size: 20px">%</sup></h3>
+                      <h3 id=humidityvalue><sup style="font-size: 20px"></sup></h3>
 
                       <p>Humidity</p>
                   </div>
@@ -196,7 +196,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                   <div class="inner">
-                      <h3>24</h3>
+                      <h3 id=temperaturevalue></h3>
 
                       <p>Temperature</p>
                   </div>
@@ -211,7 +211,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                   <div class="inner">
-                      <h3>7.7</h3>
+                      <h3 id=phvalue></h3>
 
                       <p>PH</p>
                   </div>
@@ -226,7 +226,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                   <div class="inner">
-                      <h3>65</h3>
+                      <h3 id=ppmvalue></h3>
 
                       <p>PPM</p>
                   </div>
@@ -241,7 +241,7 @@
               <!-- small box -->
               <div class="small-box bg-info">
                   <div class="inner">
-                      <h3>12</h3>
+                      <h3 id=sunlighvalue></h3>
 
                       <p>Sunlight</p>
                   </div>
@@ -253,7 +253,7 @@
           </div>
           <!-- ./col -->
         </div>
-        
+
       <div class="row">
           <div class="col-12">
               <!-- interactive chart -->
@@ -293,7 +293,6 @@
     <!-- /.row -->
         <div class="row">
           <div class="col-12">
-            
 
             <div class="card">
               <div class="card-header">
@@ -374,7 +373,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="dist/js/demo.js"></script>
 <!-- Page specific script -->
-<script src="AjaxEngineForTable.js" async=true></script>
+<script src="AjaxEngineForTable.js"></script>
+<script src="AjaxParameterBoxes.js"></script>
 <script>
     const boxes = document.querySelectorAll(".small-box-footer");
   console.log(boxes);

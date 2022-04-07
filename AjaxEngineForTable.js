@@ -77,24 +77,7 @@ function loadTable() {
   xhr.send();
   setTimeout(loadTable, 5000);
 }
-showNotification();
 loadTable();
-function showNotification() {
-  if (!Notification) {
-    $("body").append(
-      '<h4 style="color:red">*Browser does not support Web Notification</h4>'
-    );
-    return;
-  }
-  if (Notification.permission !== "granted") {
-    Notification.requestPermission();
-  } else {
-    console.log("hi");
-  }
-  var img = "/to-do-notifications/img/icon-128.png";
-  var text = "HEY! Your task 12345 is now overdue.";
-  var notification = new Notification("To do list", { body: text });
-}
 
 // //process every record
 // while( $row = pg_fetch_array($result) )
