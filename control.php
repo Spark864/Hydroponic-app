@@ -421,7 +421,7 @@
 
                 <!------------------------------------- Water Pump 1 and 2 ------------------------------------------>
                 <form id=wpstat1 method='post' action=''><?php echo $alert; ?>
-                <h3>Water Pump 1 & 2</h3>
+                <h3>Water Pump 1 & 2 (For plants)</h3>
                 <table class="table table-bordered">
                   <tr style="background: whitesmoke;">
                   <th>Object</th>
@@ -595,7 +595,7 @@
 
             <!------------------------------------- Water Pump 3 ------------------------------------------>
             <form id=wpstat3 method='post' action=''>
-                <h3>Water Pump 3</h3>
+                <h3>Water Pump 3 (For filtering)</h3>
                 <table class="table table-bordered">
                     <tr style='background: whitesmoke;'>
                         <!-- Check/Uncheck All-->
