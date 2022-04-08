@@ -15,9 +15,7 @@
     }
 
     if ($lum > 10){
-        $alertLight = '<div class="alert alert-warning" role="alert">
-        Warning! Lumen is higher than 2 
-      </div>';
+        $alertLight = '';
     }
 ?>
 
@@ -266,21 +264,21 @@
                       <div class="card-tools">
                           Parameters
                           <div class="btn-group" id="realtime" data-toggle="btn-toggle">
-                              <button type="button" class="btn btn-default btn-sm active" data-toggle="humidity">Humidity</button>
-                              <button type="button" class="btn btn-default btn-sm" data-toggle="temperature">Temperature</button>
+                              <button type="button" class="btn btn-default btn-sm active" data-toggle="humidity">Daily Average</button>
+                              <!-- <button type="button" class="btn btn-default btn-sm" data-toggle="temperature">Temperature</button>
                               <button type="button" class="btn btn-default btn-sm" data-toggle="ph">PH</button>
                               <button type="button" class="btn btn-default btn-sm" data-toggle="ppm">PPM</button>
-                              <button type="button" class="btn btn-default btn-sm" data-toggle="sunlight">Sunlight</button>
+                              <button type="button" class="btn btn-default btn-sm" data-toggle="sunlight">Sunlight</button> -->
                           </div>
                       </div>
                   </div>
                   <div class="card-body">
                       <div id="interactive" style="height: 300px;">
                       <canvas id="myChart"></canvas>
-                      <canvas id="myChart2" style="display:none;"></canvas>
+                      <!-- <canvas id="myChart2" style="display:none;"></canvas>
                       <canvas id="myChart3" style="display:none;"></canvas>
                       <canvas id="myChart4" style="display:none;"></canvas>
-                      <canvas id="myChart5" style="display:none;"></canvas>
+                      <canvas id="myChart5" style="display:none;"></canvas> -->
                     </div>
                   </div>
                   <!-- /.card-body-->
@@ -367,7 +365,7 @@
 <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <!-- AdminLTE App -->
 <script src="dist/js/adminlte.min.js"></script>
-
+<script type="module" src="plugins/chart.js/Chart.js"></script>
 <script crossorigin="anonymous" integrity="sha512-QSkVNOCYLtj73J4hbmVoOV6KVZuMluZlioC+trLpewV8qMjsWqlIQvkn1KGX2StWvPMdWGBqim1xlC8krl1EKQ==" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
 <script src="GraphHourly.js"></script>
 <!-- AdminLTE for demo purposes -->
@@ -376,53 +374,53 @@
 <script src="AjaxEngineForTable.js"></script>
 <script src="AjaxParameterBoxes.js"></script>
 <script>
-    const boxes = document.querySelectorAll(".small-box-footer");
-  console.log(boxes);
-  boxes[0].addEventListener("click", () => {
-    if (ctx.style.display === "none") {
-      ctx2.style.display = "none";
-      ctx3.style.display = "none";
-      ctx4.style.display = "none";
-      ctx5.style.display = "none";
-      ctx.style.display = "block";
-    }
-  });
-  boxes[1].addEventListener("click", () => {
-    if (ctx2.style.display === "none") {
-      ctx.style.display = "none";
-      ctx3.style.display = "none";
-      ctx4.style.display = "none";
-      ctx5.style.display = "none";
-      ctx2.style.display = "block";
-    }
-  });
-  boxes[2].addEventListener("click", () => {
-    if (ctx3.style.display === "none") {
-      ctx.style.display = "none";
-      ctx2.style.display = "none";
-      ctx4.style.display = "none";
-      ctx5.style.display = "none";
-      ctx3.style.display = "block";
-    }
-  });
-  boxes[3].addEventListener("click", () => {
-    if (ctx4.style.display === "none") {
-      ctx.style.display = "none";
-      ctx2.style.display = "none";
-      ctx3.style.display = "none";
-      ctx5.style.display = "none";
-      ctx4.style.display = "block";
-    }
-  });
-  boxes[4].addEventListener("click", () => {
-    if (ctx5.style.display === "none") {
-        ctx.style.display = "none";
-        ctx2.style.display = "none";
-        ctx3.style.display = "none";
-        ctx4.style.display = "none";
-        ctx5.style.display = "block";
-      }
-  });
+  //   const boxes = document.querySelectorAll(".small-box-footer");
+  // console.log(boxes);
+  // boxes[0].addEventListener("click", () => {
+  //   if (ctx.style.display === "none") {
+  //     ctx2.style.display = "none";
+  //     ctx3.style.display = "none";
+  //     ctx4.style.display = "none";
+  //     ctx5.style.display = "none";
+  //     ctx.style.display = "block";
+  //   }
+  // });
+  // boxes[1].addEventListener("click", () => {
+  //   if (ctx2.style.display === "none") {
+  //     ctx.style.display = "none";
+  //     ctx3.style.display = "none";
+  //     ctx4.style.display = "none";
+  //     ctx5.style.display = "none";
+  //     ctx2.style.display = "block";
+  //   }
+  // });
+  // boxes[2].addEventListener("click", () => {
+  //   if (ctx3.style.display === "none") {
+  //     ctx.style.display = "none";
+  //     ctx2.style.display = "none";
+  //     ctx4.style.display = "none";
+  //     ctx5.style.display = "none";
+  //     ctx3.style.display = "block";
+  //   }
+  // });
+  // boxes[3].addEventListener("click", () => {
+  //   if (ctx4.style.display === "none") {
+  //     ctx.style.display = "none";
+  //     ctx2.style.display = "none";
+  //     ctx3.style.display = "none";
+  //     ctx5.style.display = "none";
+  //     ctx4.style.display = "block";
+  //   }
+  // });
+  // boxes[4].addEventListener("click", () => {
+  //   if (ctx5.style.display === "none") {
+  //       ctx.style.display = "none";
+  //       ctx2.style.display = "none";
+  //       ctx3.style.display = "none";
+  //       ctx4.style.display = "none";
+  //       ctx5.style.display = "block";
+  //     }
+  // });
 </script>
 </body>
 </html>
