@@ -18,9 +18,12 @@ i2c = busio.I2C(board.SCL, board.SDA)
 # Create the ADC object using the I2C bus
 ads = ADS.ADS1015(i2c)
 
-# Create single-ended input on channel 0
+# Create single-ended input on channel 0,1,2 on ADC1115
+# read analog sign ppm sensor in channel 0
 chanppm = AnalogIn(ads, ADS.P0)
+# read analog sign sunlight intensity sensor in channel 1
 chansun = AnalogIn(ads, ADS.P1)
+# read analog sign ph sensor in channel 2
 chanph = AnalogIn(ads, ADS.P2)
 
 # Create differential input between channel 0 and 1
@@ -37,7 +40,7 @@ averageVoltage = 0
 tdsValue = 0
 temperature = 25
 
-
+#get median from analogBufferTemp
 def getMedianNum(iFilterLen):
     global analogBufferTemp
     bTemp = 0.0
@@ -58,8 +61,9 @@ analogSampleTimepoint = time.time()
 printTimepoint = time.time()
 
 ph = DFRobot_PH()
-
-dhtDevice = adafruit_dht.DHT11(board.D4)
+#use pin 33 on raspberrypi for DHT11 sensor
+dhtDevice = adafruit_dht.DHT11(board.D13)
+#connect to posGres db on heroku
 url = urllib.parse.urlparse(
     "postgres://nhchgncqtdohmw:44f34a07049a26867f87219d2591a73ba66b665048b3c11b6e9b8e10269c476a@ec2-54-147-93-73.compute-1.amazonaws.com:5432/d29h2tvqmjhdqj")
 mydb = psycopg2.connect(
@@ -68,15 +72,19 @@ mydb = psycopg2.connect(
     password=url.password,
     database=url.path[1:]
 )
+#set time format
 time.strftime("%d/%m/%Y %H:%M:%S")
-
+#loop every 5 seconds
 while True:
     try:
-        # s
+        # get temperature and humidity from DHT11
         humidity, temperature = dhtDevice.temperature, dhtDevice.humidity
         if humidity is not None and temperature is not None:
             print("Temp={0:0.1f}C Humidity={1:0.1f}%".format(temperature, humidity))
+            # print sunlight intensity
+            # sunlight intensity is voltage from digital signal in channel 1 for ADC1115
             print("{:>5}\t{:>5.3f}".format(chanppm.value, chansun.voltage))
+            #calculate ppm
             if time.time() - analogSampleTimepoint > 0.04:
                 # print(" test.......... ")
                 analogSampleTimepoint = time.time()
@@ -103,12 +111,15 @@ while True:
             # Get the Digital Value of Analog of selected channel
             adc0 = chanph.voltage
             # Convert voltage to PH with temperature compensation
+            # use the provided code from Dfrobot Github to use Dfrobot Gravity PH SensorV2
+            # get ph from voltage and temperature
             PH = ph.read_PH(chanph.voltage, temperature)
             print("Temperature:%.1f ^C PH:%.2f" % (temperature, PH))
-
+            #get todays time
             now = datetime.now()
             dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
             print("date and time =", dt_string)
+            #insert humidity, temperature, ph, ppm, sunlight intensity into posGres db in Heroku
             mycursor = mydb.cursor()
             sql = "INSERT INTO DataCollect (temperature, humidity, date, ph, ppm, lum) VALUES (%s, %s, %s, %s, %s, %s)"
             val = (temperature, humidity, now, PH, tdsValue, chansun.voltage)
@@ -118,7 +129,7 @@ while True:
             mycursor.execute("SELECT * FROM DataCollect")
 
             myresult = mycursor.fetchall()
-
+            #print all tuples in datacollect table
             for x in myresult:
                 print(x)
         else:
