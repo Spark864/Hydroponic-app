@@ -2,7 +2,8 @@ import time
 from datetime import datetime, timedelta
 from datetime import date
 import RPi.GPIO as GPIO
-
+#code used to run timers on water pumps during the first presentation demo
+#It is updated to control.py and this code is for reference
 GPIO.setwarnings(False)  # Ignore warning for now
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 GPIO.setup(13, GPIO.OUT, initial=GPIO.LOW)  # Set pin 8 to be an output pin and set initial value to low (off)

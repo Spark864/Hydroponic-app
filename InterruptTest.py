@@ -4,7 +4,7 @@ import ctypes
 
 exit = threading.Event()
 
-
+# this python code is for testing thread interrupt in timer and is not used in the final product
 def main():
     try:
         while not exit.is_set():

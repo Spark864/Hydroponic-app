@@ -1,6 +1,6 @@
 import RPi.GPIO as GPIO
 import time
-
+# this python code is for testing turnning on and off water pumps and led light and is not used in the final product
 GPIO.setwarnings(False)  # Ignore warning for now
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 # 36 38 37 40 32 29 31
